@@ -58,21 +58,6 @@
     return $$('.word', el);
   }
 
-  var heroChars = [];
-  if (hasGSAP) {
-    $$('[data-split]').forEach(function (line) {
-      var chars = splitChars(line);
-      heroChars = heroChars.concat(chars);
-      /* keep the gradient continuous across split characters */
-      if (line.classList.contains('title-line-2')) {
-        var w = line.getBoundingClientRect().width;
-        var left = line.getBoundingClientRect().left;
-        line.style.setProperty('--line-w', w + 'px');
-        chars.forEach(function (c) { c.style.setProperty('--char-x', (c.getBoundingClientRect().left - left) + 'px'); });
-      }
-    });
-  }
-
   /* ---------------------------------------------------------------
      Smooth scrolling (Lenis), synced with ScrollTrigger
      --------------------------------------------------------------- */
@@ -291,7 +276,7 @@
   }
 
   /* ---------------------------------------------------------------
-     Intro overlay + hero entrance
+     Hero entrance (short, never blocks content: starts within 300ms)
      --------------------------------------------------------------- */
   var heroBits = $$('[data-hero]');
   var stageLayers = stage ? {
@@ -307,71 +292,35 @@
     if (!hasGSAP) {
       root.classList.remove('hero-pending');
       if (terrain) { terrain.setIntro(1); terrain.start(); }
-      startRoles();
       return;
     }
-    gsap.set(heroChars, { yPercent: 115 });
-    gsap.set(heroBits, { opacity: 0, y: 24 });
+    gsap.set(heroBits, { opacity: 0, y: 18 });
     if (stageLayers) {
       gsap.set(stageLayers.glow, { opacity: 0 });
-      gsap.set(stageLayers.portal, { opacity: 0, scale: 0.86 });
-      gsap.set(stageLayers.portrait, { opacity: 0, y: 50 });
+      gsap.set(stageLayers.portal, { opacity: 0, scale: 0.9 });
+      gsap.set(stageLayers.portrait, { opacity: 0, y: 36 });
       gsap.set(stageLayers.lines, { strokeDashoffset: 1 });
       gsap.set(stageLayers.sats, { opacity: 0 });
-      gsap.set(stageLayers.chips, { opacity: 0, scale: 0.6 });
+      gsap.set(stageLayers.chips, { opacity: 0, scale: 0.7 });
     }
     root.classList.remove('hero-pending');
     if (terrain) terrain.start();
 
     var tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-    tl.to(terrainIntro, { v: 1, duration: 2.4, ease: 'power3.out', onUpdate: function () { if (terrain) terrain.setIntro(terrainIntro.v); } }, 0)
-      .to(heroBits[0], { opacity: 1, y: 0, duration: 1 }, 0.1)
-      .to(heroChars, { yPercent: 0, duration: 1.25, stagger: 0.028 }, 0.15)
-      .to(heroBits.slice(1), { opacity: 1, y: 0, duration: 1.1, stagger: 0.08 }, 0.55);
+    tl.to(terrainIntro, { v: 1, duration: 1.8, ease: 'power3.out', onUpdate: function () { if (terrain) terrain.setIntro(terrainIntro.v); } }, 0)
+      .to(heroBits, { opacity: 1, y: 0, duration: 0.9, stagger: 0.07 }, 0);
     if (stageLayers) {
-      tl.to(stageLayers.glow, { opacity: 1, duration: 1.6, ease: 'power2.out' }, 0.2)
-        .to(stageLayers.portal, { opacity: 1, scale: 1, duration: 1.6 }, 0.25)
-        .to(stageLayers.portrait, { opacity: 1, y: 0, duration: 1.5 }, 0.45)
-        .to(stageLayers.lines, { strokeDashoffset: 0, duration: 2, ease: 'power3.inOut', stagger: 0.1 }, 0.5)
-        .to(stageLayers.sats, { opacity: 1, duration: 0.8 }, 1.4)
-        .to(stageLayers.chips, { opacity: 1, scale: 1, duration: 1.1, ease: 'back.out(1.6)', stagger: 0.09 }, 1.0);
+      tl.to(stageLayers.glow, { opacity: 1, duration: 1.2, ease: 'power2.out' }, 0.05)
+        .to(stageLayers.portal, { opacity: 1, scale: 1, duration: 1.2 }, 0.1)
+        .to(stageLayers.portrait, { opacity: 1, y: 0, duration: 1.1 }, 0.2)
+        .to(stageLayers.lines, { strokeDashoffset: 0, duration: 1.6, ease: 'power3.inOut', stagger: 0.08 }, 0.3)
+        .to(stageLayers.sats, { opacity: 1, duration: 0.6 }, 1.0)
+        .to(stageLayers.chips, { opacity: 1, scale: 1, duration: 0.9, ease: 'back.out(1.6)', stagger: 0.07 }, 0.55);
     }
-    tl.add(startRoles, 1.6);
   }
 
-  function whenReady(cb) {
-    var portrait = $('.portrait');
-    var imgReady = new Promise(function (res) {
-      if (!portrait || portrait.complete) return res();
-      portrait.addEventListener('load', res, { once: true });
-      portrait.addEventListener('error', res, { once: true });
-    });
-    var fontsReady = doc.fonts && doc.fonts.ready ? doc.fonts.ready : Promise.resolve();
-    var timeout = new Promise(function (res) { setTimeout(res, 1800); });
-    Promise.race([Promise.all([imgReady, fontsReady]), timeout]).then(cb);
-  }
-
-  var introEl = $('.intro');
-  var showIntro = root.classList.contains('show-intro') && introEl && hasGSAP;
-  var t0 = performance.now();
-
-  whenReady(function () {
-    if (showIntro) {
-      var wait = Math.max(0, 1250 - (performance.now() - t0));
-      setTimeout(function () {
-        try { sessionStorage.setItem('ce-intro', '1'); } catch (e) {}
-        gsap.to(introEl, {
-          clipPath: 'inset(0 0 100% 0)', duration: 1, ease: 'expo.inOut',
-          onComplete: function () { root.classList.remove('show-intro'); introEl.remove(); }
-        });
-        gsap.delayedCall(0.35, heroEntrance);
-      }, wait);
-    } else {
-      root.classList.remove('show-intro');
-      if (introEl) introEl.remove();
-      heroEntrance();
-    }
-  });
+  var fontsReady = doc.fonts && doc.fonts.ready ? doc.fonts.ready : Promise.resolve();
+  Promise.race([fontsReady, new Promise(function (res) { setTimeout(res, 300); })]).then(heroEntrance);
 
   /* Hero parallax as it scrolls away */
   if (hasGSAP && hero) {
@@ -580,6 +529,13 @@
       message: function (v) { return v.trim().length >= 20 ? '' : 'Please write at least 20 characters so I know how I can help.'; }
     };
     var touched = false;
+    var hasEndpoint = !!(form.getAttribute('data-endpoint') || '').trim();
+    var note = $('.form-note', form);
+    if (hasEndpoint) {
+      label.textContent = 'Send message';
+      if (note) note.textContent = "Your message is sent straight to my inbox. I'll reply by email.";
+    }
+    var idleLabel = label.textContent;
 
     function check(field) {
       var rule = rules[field.name];
@@ -615,13 +571,13 @@
           .then(function (r) { if (!r.ok) throw new Error('Request failed'); })
           .then(function () { form.reset(); touched = false; status.textContent = 'Thanks, your message has been sent. I\'ll reply by email.'; })
           .catch(function () { status.textContent = 'Your message could not be sent. Please email chiranthag20@gmail.com instead.'; status.classList.add('is-error'); })
-          .then(function () { submitBtn.disabled = false; label.textContent = 'Send message'; });
+          .then(function () { submitBtn.disabled = false; label.textContent = idleLabel; });
       } else {
         var to = form.getAttribute('data-mailto');
         var subject = 'Portfolio enquiry from ' + data.name + (data.company ? ' (' + data.company + ')' : '');
         var body = data.message + '\n\n' + data.name + '\n' + data.email + (data.company ? '\n' + data.company : '');
         window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-        status.textContent = 'Your email app should open with the message ready to send. If it doesn\'t, email ' + to + '.';
+        status.textContent = 'Opening your email app with the message ready to send. If nothing opens, email ' + to + ' directly.';
       }
     });
   }

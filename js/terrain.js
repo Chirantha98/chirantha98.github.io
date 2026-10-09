@@ -11,11 +11,11 @@
 
   /* Colour stops: deep iris at the base, mint at the peak */
   var STOPS = [
-    [ 92,  96, 210],
-    [125, 140, 255],
-    [125, 211, 252],
-    [ 94, 234, 212],
-    [220, 255, 248]
+    [ 67,  56, 202],
+    [ 99, 102, 241],
+    [139,  92, 246],
+    [196, 181, 253],
+    [165, 243, 252]
   ];
   function lerpColour(t) {
     t = Math.max(0, Math.min(1, t)) * (STOPS.length - 1);
@@ -61,14 +61,14 @@
   Terrain.prototype.resize = function () {
     var c = this.canvas;
     var w = c.clientWidth || 1, h = c.clientHeight || 1;
-    var dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+    var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     this.w = w; this.h = h; this.dpr = dpr;
     c.width = Math.round(w * dpr);
     c.height = Math.round(h * dpr);
     this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     var wide = w >= 1024;
-    this.cols = w < 560 ? 52 : w < 1024 ? 72 : 104;
+    this.cols = w < 560 ? 52 : w < 1024 ? 70 : 90;
     this.rows = Math.round(this.cols * 0.56);
     this.layout = wide
       ? { peakX: 0.72, peakY: 0.80, scale: Math.min(w, 1500) / 1500 * 1.12 }
@@ -214,7 +214,7 @@
     ctx.lineWidth = 1;
     ctx.setLineDash([3, 5]);
     for (var k = 1; k <= 3; k++) {
-      ctx.strokeStyle = 'rgba(165,166,255,' + (0.26 - k * 0.055) * this.intro + ')';
+      ctx.strokeStyle = 'rgba(167,139,250,' + (0.3 - k * 0.06) * this.intro + ')';
       ctx.beginPath();
       for (var a = 0; a <= 72; a++) {
         var th = (a / 72) * TAU;
@@ -248,7 +248,7 @@
         var k = 3 / (3 + z2);
         pts.push(cx + x1 * S.r * k, cy + y1 * S.r * k);
       }
-      ctx.strokeStyle = 'rgba(125,211,252,' + 0.38 * this.intro + ')';
+      ctx.strokeStyle = 'rgba(165,180,252,' + 0.4 * this.intro + ')';
       ctx.lineWidth = 1;
       ctx.beginPath();
       for (var e = 0; e < ICO.e.length; e++) {
@@ -257,7 +257,7 @@
         ctx.lineTo(pts[b], pts[b + 1]);
       }
       ctx.stroke();
-      ctx.fillStyle = 'rgba(94,234,212,' + 0.75 * this.intro + ')';
+      ctx.fillStyle = 'rgba(34,211,238,' + 0.8 * this.intro + ')';
       ctx.beginPath();
       for (var v2 = 0; v2 < pts.length; v2 += 2) ctx.rect(pts[v2] - 1.3, pts[v2 + 1] - 1.3, 2.6, 2.6);
       ctx.fill();
@@ -266,7 +266,7 @@
 
   Terrain.prototype.renderDust = function () {
     var ctx = this.ctx, t = this.t, w = this.w, h = this.h;
-    ctx.fillStyle = 'rgba(200,230,255,' + 0.5 * this.intro + ')';
+    ctx.fillStyle = 'rgba(210,205,255,' + 0.5 * this.intro + ')';
     ctx.beginPath();
     for (var i = 0; i < this.dust.length; i++) {
       var d = this.dust[i];
