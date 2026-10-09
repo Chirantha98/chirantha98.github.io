@@ -1,6 +1,6 @@
-# chirantha98.github.io
+# chiranthaekanayake.github.io
 
-Personal portfolio of Chirantha Ekanayake, Data Analyst. Live at https://chirantha98.github.io/
+Personal portfolio of Chirantha Ekanayake, Data Analyst. Live at https://chiranthaekanayake.github.io/
 
 A static site with no build step: edit the files and upload them, and GitHub Pages publishes the change.
 
