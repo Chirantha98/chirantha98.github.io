@@ -925,7 +925,7 @@ button { font: inherit; color: inherit; }
   place-items: center;
   width: 54px; height: 54px;
   flex: none;
-  border-radius: 18px;
+  border-radius: 15px;
   background: #fff;
   overflow: hidden;
   isolation: isolate;
