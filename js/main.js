@@ -566,11 +566,29 @@
       var endpoint = (form.getAttribute('data-endpoint') || '').trim();
 
       if (endpoint) {
+        /* Formspree: send the form fields (incl. its _gotcha honeypot) and ask for a JSON reply */
+        var payload = new FormData(form);
+        payload.append('_subject', 'Portfolio enquiry from ' + data.name + (data.company ? ' (' + data.company + ')' : ''));
         submitBtn.disabled = true; label.textContent = 'Sending…';
-        fetch(endpoint, { method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
-          .then(function (r) { if (!r.ok) throw new Error('Request failed'); })
-          .then(function () { form.reset(); touched = false; status.textContent = 'Thanks, your message has been sent. I\'ll reply by email.'; })
-          .catch(function () { status.textContent = 'Your message could not be sent. Please email chiranthag20@gmail.com instead.'; status.classList.add('is-error'); })
+        fetch(endpoint, { method: 'POST', body: payload, headers: { 'Accept': 'application/json' } })
+          .then(function (r) {
+            if (r.ok) return null;
+            return r.json().catch(function () { return {}; }).then(function (j) {
+              var msg = j && j.errors && j.errors.length ? j.errors.map(function (x) { return x.message; }).join(' ') : '';
+              throw new Error(msg || (r.status === 429 ? 'Too many messages right now. Please try again in a minute.' : 'Request failed'));
+            });
+          })
+          .then(function () {
+            form.reset(); touched = false;
+            $$('[aria-invalid]', form).forEach(function (f) { f.removeAttribute('aria-invalid'); });
+            status.textContent = 'Thanks, your message has been sent. I\'ll reply by email soon.';
+          })
+          .catch(function (err) {
+            var detail = err && err.message && err.message !== 'Request failed' && err.message !== 'Failed to fetch' ? err.message.trim() : '';
+            if (detail) { detail = detail.charAt(0).toUpperCase() + detail.slice(1); if (!/[.!?]$/.test(detail)) detail += '.'; detail += ' '; }
+            status.textContent = detail + 'Your message could not be sent. Please email ' + (form.getAttribute('data-mailto') || 'me') + ' instead.';
+            status.classList.add('is-error');
+          })
           .then(function () { submitBtn.disabled = false; label.textContent = idleLabel; });
       } else {
         var to = form.getAttribute('data-mailto');
