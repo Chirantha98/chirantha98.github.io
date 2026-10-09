@@ -875,6 +875,97 @@ button { font: inherit; color: inherit; }
 }
 .preview-tag .ico { width: 12px; height: 12px; }
 
+/* Project images (click to enlarge) */
+.preview-zoom {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: inherit;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+.preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: rotateX(var(--tx)) rotateY(var(--ty));
+  transition: transform .6s var(--ease-out);
+}
+.project-card:hover .preview-img { transform: rotateX(var(--tx)) rotateY(var(--ty)) scale(1.035); }
+.preview-zoom::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(7, 14, 41, .45));
+  pointer-events: none;
+}
+.zoom-hint {
+  position: absolute;
+  z-index: 1;
+  right: 12px; bottom: 12px;
+  display: grid;
+  place-items: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(7, 14, 41, .78);
+  border: 1px solid rgba(165,180,252,.25);
+  color: var(--text);
+  opacity: 0;
+  transform: scale(.85);
+  transition: opacity .3s, transform .4s var(--ease-out);
+}
+.zoom-hint .ico { width: 16px; height: 16px; }
+.preview-zoom:hover .zoom-hint, .preview-zoom:focus-visible .zoom-hint { opacity: 1; transform: none; }
+.preview-zoom:focus-visible { outline-offset: -3px; }
+.preview-tag { z-index: 1; pointer-events: none; }
+
+/* Organisation logos (Experience, Education) */
+.org-logo {
+  display: grid;
+  place-items: center;
+  width: 54px; height: 54px;
+  flex: none;
+  border-radius: 15px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(165,180,252,.25), 0 10px 24px -12px rgba(3,6,22,.8);
+}
+.org-logo img { width: 100%; height: 100%; object-fit: contain; }
+
+/* Image viewer */
+.lightbox {
+  width: min(1240px, 94vw);
+  max-width: none;
+  max-height: 92vh;
+  padding: 0;
+  border: 1px solid var(--glass-line-strong);
+  border-radius: var(--r-lg);
+  background: var(--navy-deep);
+  color: var(--text);
+  box-shadow: 0 40px 80px -30px rgba(0,0,0,.9);
+  overflow: hidden;
+}
+.lightbox::backdrop { background: rgba(4, 8, 24, .82); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.lightbox[open] { animation: lb-in .35s var(--ease-out); }
+@keyframes lb-in { from { opacity: 0; transform: translateY(12px) scale(.98); } }
+.lightbox-figure { margin: 0; }
+.lightbox-img { display: block; width: 100%; height: auto; max-height: calc(92vh - 64px); object-fit: contain; background: #050A1F; }
+.lightbox-caption { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; padding: 14px 64px 16px 18px; color: var(--text-2); font-size: var(--fs-small); }
+.lightbox-close {
+  position: absolute;
+  right: 10px; bottom: 8px;
+  display: grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  border: 1px solid var(--glass-line-strong);
+  border-radius: 50%;
+  background: rgba(15, 30, 74, .9);
+  color: var(--text);
+  cursor: pointer;
+}
+.lightbox-close:hover { border-color: rgba(167,139,250,.6); }
+@media (hover: none) { .zoom-hint { opacity: 1; transform: none; } }
+
 /* Project art palette */
 .art-win { fill: rgba(255,255,255,.025); stroke: rgba(165,180,252,.12); }
 .art-dot { fill: rgba(255,255,255,.18); }

@@ -583,6 +583,31 @@
   }
 
   /* ---------------------------------------------------------------
+     Image viewer (native <dialog>: Esc closes, focus returns to the image)
+     --------------------------------------------------------------- */
+  var lightbox = $('.lightbox');
+  if (lightbox && typeof lightbox.showModal === 'function') {
+    var lbImg = $('.lightbox-img', lightbox);
+    var lbCap = $('.lightbox-text', lightbox);
+    var lbOpen = $('.lightbox-open', lightbox);
+    doc.addEventListener('click', function (e) {
+      var link = e.target.closest('.preview-zoom');
+      if (!link) return;
+      e.preventDefault();
+      var thumb = $('img', link);
+      lbImg.src = link.getAttribute('href');
+      lbImg.alt = thumb ? thumb.alt : '';
+      lbCap.textContent = link.getAttribute('data-caption') || '';
+      lbOpen.href = link.getAttribute('href');
+      lightbox.showModal();
+      if (lenis) lenis.stop();
+    });
+    $('.lightbox-close', lightbox).addEventListener('click', function () { lightbox.close(); });
+    lightbox.addEventListener('click', function (e) { if (e.target === lightbox) lightbox.close(); });
+    lightbox.addEventListener('close', function () { if (lenis) lenis.start(); lbImg.src = 'data:,'; });
+  }
+
+  /* ---------------------------------------------------------------
      Back to top
      --------------------------------------------------------------- */
   $$('.to-top').forEach(function (b) {

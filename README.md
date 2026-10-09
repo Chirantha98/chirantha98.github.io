@@ -14,7 +14,8 @@ A static site with no build step: edit the files and upload them, and GitHub Pag
 | `js/terrain.js` | The animated 3D "data terrain" in the hero (canvas, no libraries). |
 | `js/vendor/` | GSAP, ScrollTrigger and Lenis, bundled so the site has no CDN dependency. |
 | `fonts/` | Space Grotesk (headings), Inter (text) and JetBrains Mono (labels), self-hosted. |
-| `assets/logos/` | Technology logos (Power BI, Excel, Tableau, Python, R, SQL, Minitab, MATLAB, PowerPoint). |
+| `assets/projects/` | Project images: `name.webp` for the card and `name-full.webp` for the enlarged view. |
+| `assets/logos/` | Technology logos (Power BI, Excel, Tableau, Python, R, SQL, Minitab, MATLAB, PowerPoint), plus the MAS and University of Ruhuna logos. |
 | `assets/portrait-cutout.webp` | Portrait with the background removed, used in the 3D hero. |
 | `assets/profile.jpg` | Square photo, used for search engines and link previews. |
 | `assets/og-image.png` | 1200×630 image shown when the link is shared on LinkedIn and elsewhere. |
@@ -22,6 +23,7 @@ A static site with no build step: edit the files and upload them, and GitHub Pag
 
 ## Common edits
 
+- **Replace a project image:** save the new image over the matching files in `assets/projects/` (keep the same names), or ask for it to be resized to 960px (card) and 1600px (enlarged).
 - **Update the CV:** upload a new PDF named exactly `Chirantha_Ekanayake_CV.pdf` into `assets/`.
 - **Add a certification:** in `index.html`, copy one `<li class="cert ...">` block under "Certifications".
 - **Add a credential link:** see the comment above the certification list in `index.html`.
