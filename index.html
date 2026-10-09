@@ -1,21 +1,39 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en-GB" class="no-js">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script>document.documentElement.classList.replace('no-js', 'js');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+  /* Runs before paint: switch to the JS experience and decide whether to show the intro. */
+  (function (d) {
+    var r = d.documentElement;
+    r.classList.remove('no-js');
+    r.classList.add('js');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var seen = false;
+    try { seen = sessionStorage.getItem('ce-intro') === '1'; } catch (e) {}
+    if (!reduce && !seen) r.classList.add('show-intro');
+    /* Hide hero pieces until their entrance animation starts (failsafe after 4.5s) */
+    if (!reduce) {
+      r.classList.add('hero-pending');
+      setTimeout(function () { r.classList.remove('hero-pending'); }, 4500);
+    }
+  })(document);
+</script>
 
-<!-- ============ SEO ============ -->
+<!-- ===================== SEO ===================== -->
 <title>Chirantha Ekanayake | Data Analyst Portfolio</title>
-<meta name="description" content="Chirantha Ekanayake, data analyst in Matara, Sri Lanka. Power BI dashboards, quality analytics and statistical modelling. Open to entry-level roles.">
+<meta name="description" content="Chirantha Ekanayake, data analyst in Sri Lanka. Power BI dashboards, quality analytics, forecasting and statistical modelling. Open to entry-level roles.">
 <link rel="canonical" href="https://chirantha98.github.io/">
-<meta name="theme-color" content="#0B1120">
+<meta name="theme-color" content="#05080F">
+<meta name="color-scheme" content="dark">
 <meta name="author" content="Chirantha Ekanayake">
 
-<!-- ============ Open Graph / Twitter ============ -->
+<!-- ===================== Social sharing ===================== -->
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Chirantha Ekanayake">
 <meta property="og:title" content="Chirantha Ekanayake | Data Analyst Portfolio">
-<meta property="og:description" content="Power BI dashboards, quality analytics and statistical modelling. Open to entry-level Data Analyst, BI Analyst and planning roles.">
+<meta property="og:description" content="Power BI dashboards, quality analytics, forecasting and statistical modelling. Open to entry-level Data Analyst, BI Analyst and planning roles.">
 <meta property="og:url" content="https://chirantha98.github.io/">
 <meta property="og:image" content="https://chirantha98.github.io/assets/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -23,20 +41,18 @@
 <meta property="og:image:alt" content="Chirantha Ekanayake, Data Analyst portfolio">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Chirantha Ekanayake | Data Analyst Portfolio">
-<meta name="twitter:description" content="Power BI dashboards, quality analytics and statistical modelling. Open to entry-level roles.">
+<meta name="twitter:description" content="Power BI dashboards, quality analytics, forecasting and statistical modelling.">
 <meta name="twitter:image" content="https://chirantha98.github.io/assets/og-image.png">
 <meta name="twitter:image:alt" content="Chirantha Ekanayake, Data Analyst portfolio">
 
-<!-- ============ Favicon: "CE" monogram ============ -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111827'/%3E%3Crect x='1.5' y='1.5' width='61' height='61' rx='12.5' fill='none' stroke='%232DD4BF' stroke-opacity='.45' stroke-width='3'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-size='27' font-weight='700' fill='%232DD4BF'%3ECE%3C/text%3E%3C/svg%3E">
+<!-- ===================== Icons and fonts ===================== -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235EEAD4'/%3E%3Cstop offset='1' stop-color='%23A5A6FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%230A1020'/%3E%3Crect x='1.5' y='1.5' width='61' height='61' rx='14.5' fill='none' stroke='url(%23g)' stroke-width='3'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-size='26' font-weight='700' fill='url(%23g)'%3ECE%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="fonts/sora-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/portrait-cutout.webp" as="image" type="image/webp">
+<link rel="stylesheet" href="css/style.css">
 
-<!-- ============ Fonts and icons ============ -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-
-<!-- ============ Structured data ============ -->
+<!-- ===================== Structured data ===================== -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,15 +60,11 @@
   "name": "Chirantha Ekanayake",
   "jobTitle": "Data Analyst",
   "url": "https://chirantha98.github.io/",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Matara",
-    "addressCountry": "LK"
-  },
-  "alumniOf": {
-    "@type": "CollegeOrUniversity",
-    "name": "University of Ruhuna"
-  },
+  "image": "https://chirantha98.github.io/assets/profile.jpg",
+  "email": "mailto:chiranthag20@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Matara", "addressCountry": "LK" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "University of Ruhuna" },
+  "knowsAbout": ["Data analysis", "Power BI", "Statistical modelling", "Time series forecasting", "Quality analytics", "SQL", "R", "Python"],
   "sameAs": [
     "https://www.linkedin.com/in/chiranthaekanayake",
     "https://github.com/Chirantha98"
@@ -60,1721 +72,846 @@
 }
 </script>
 
-<style>
-/* =========================================================
-   1. THEME VARIABLES  (change colours and fonts here)
-   ========================================================= */
-:root {
-  --bg: #0B1120;
-  --surface: #111827;
-  --border: #1F2937;
-  --text: #E5E7EB;
-  --muted: #9CA3AF;
-  --accent: #2DD4BF;
-  --accent-2: #60A5FA;
-
-  --accent-soft: rgba(45, 212, 191, 0.10);
-  --accent-line: rgba(45, 212, 191, 0.45);
-  --on-accent: #042F2B;
-
-  --font-head: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-
-  --radius: 14px;
-  --radius-sm: 10px;
-  --maxw: 1160px;
-  --nav-h: 68px;
-  --ease: cubic-bezier(.2, .7, .2, 1);
-}
-
-/* =========================================================
-   2. BASE
-   ========================================================= */
-*, *::before, *::after { box-sizing: border-box; }
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--nav-h) + 8px);
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-
-img { max-width: 100%; display: block; }
-
-h1, h2, h3, h4 {
-  font-family: var(--font-head);
-  color: var(--text);
-  line-height: 1.2;
-  margin: 0;
-  letter-spacing: -0.02em;
-}
-
-p { margin: 0; }
-
-a { color: var(--accent); text-underline-offset: 3px; }
-
-::selection { background: rgba(45, 212, 191, 0.3); color: #fff; }
-
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 6px;
-}
-
-.sr-only {
-  position: absolute !important;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden; clip: rect(0 0 0 0);
-  white-space: nowrap; border: 0;
-}
-
-.skip-link {
-  position: absolute;
-  left: 16px; top: -100px;
-  z-index: 100;
-  padding: 10px 16px;
-  border-radius: var(--radius-sm);
-  background: var(--accent);
-  color: var(--on-accent);
-  font-weight: 600;
-  text-decoration: none;
-}
-.skip-link:focus { top: 12px; }
-
-.container {
-  width: 100%;
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.section { padding: 72px 0; }
-.section + .section { border-top: 1px solid rgba(31, 41, 55, 0.6); }
-
-.section-head { margin-bottom: 36px; max-width: 44rem; }
-.section-head h2 {
-  font-size: clamp(1.75rem, 4vw, 2.375rem);
-  font-weight: 800;
-}
-.section-head p {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 1.0625rem;
-}
-
-/* Inline line icons (from the SVG sprite) */
-.i {
-  width: 18px; height: 18px;
-  flex: none;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.75;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* Visible placeholders still to be filled in */
-.placeholder {
-  display: inline-block;
-  padding: 2px 8px;
-  border: 1px dashed var(--accent-2);
-  border-radius: 6px;
-  background: rgba(96, 165, 250, 0.08);
-  color: #BFDBFE;
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-}
-
-/* =========================================================
-   3. BUTTONS AND CHIPS
-   ========================================================= */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 46px;
-  padding: 11px 20px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--surface);
-  color: var(--text);
-  font: 600 0.9375rem/1.2 var(--font-body);
-  text-decoration: none;
-  cursor: pointer;
-  transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s, background-color .2s, color .2s;
-}
-.btn:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent-line);
-  box-shadow: 0 8px 24px -12px rgba(45, 212, 191, 0.45);
-}
-.btn-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--on-accent);
-}
-.btn-primary:hover { background: #5EEAD4; border-color: #5EEAD4; }
-
-.icon-btn {
-  display: inline-grid;
-  place-items: center;
-  width: 44px; height: 44px;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  background: var(--surface);
-  color: var(--muted);
-  font-size: 1.125rem;
-  text-decoration: none;
-  transition: transform .2s var(--ease), color .2s, border-color .2s;
-}
-.icon-btn:hover {
-  color: var(--accent);
-  border-color: var(--accent-line);
-  transform: translateY(-2px);
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.02);
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  line-height: 1.5;
-}
-
-.tag {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  color: var(--accent);
-}
-
-/* =========================================================
-   4. NAVIGATION
-   ========================================================= */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(11, 17, 32, 0.72);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  backdrop-filter: blur(14px) saturate(140%);
-  border-bottom: 1px solid transparent;
-  transition: border-color .2s;
-}
-.site-header.is-scrolled { border-bottom-color: var(--border); }
-
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: var(--nav-h);
-}
-
-.logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--text);
-  text-decoration: none;
-  font-family: var(--font-head);
-  font-weight: 700;
-}
-.monogram {
-  display: grid;
-  place-items: center;
-  width: 38px; height: 38px;
-  border-radius: 10px;
-  border: 1px solid var(--accent-line);
-  background: var(--surface);
-  color: var(--accent);
-  font-size: 0.9375rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-}
-.logo-name { display: none; }
-.nav > nav { order: 1; }
-.nav-toggle { order: 2; }
-
-.nav-toggle {
-  display: inline-grid;
-  place-items: center;
-  width: 44px; height: 44px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--surface);
-  color: var(--text);
-  cursor: pointer;
-}
-.nav-toggle .bars { position: relative; width: 18px; height: 12px; }
-.nav-toggle .bars span {
-  position: absolute; left: 0;
-  width: 100%; height: 2px;
-  border-radius: 2px;
-  background: currentColor;
-  transition: transform .25s var(--ease), opacity .2s, top .25s var(--ease);
-}
-.nav-toggle .bars span:nth-child(1) { top: 0; }
-.nav-toggle .bars span:nth-child(2) { top: 5px; }
-.nav-toggle .bars span:nth-child(3) { top: 10px; }
-.nav-toggle[aria-expanded="true"] .bars span:nth-child(1) { top: 5px; transform: rotate(45deg); }
-.nav-toggle[aria-expanded="true"] .bars span:nth-child(2) { opacity: 0; }
-.nav-toggle[aria-expanded="true"] .bars span:nth-child(3) { top: 5px; transform: rotate(-45deg); }
-
-.nav-menu {
-  display: none;
-  position: fixed;
-  top: var(--nav-h);
-  left: 0; right: 0;
-  max-height: calc(100vh - var(--nav-h));
-  overflow-y: auto;
-  margin: 0;
-  padding: 12px 20px 24px;
-  list-style: none;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-}
-.nav-menu.is-open { display: block; }
-.nav-menu a {
-  display: block;
-  padding: 12px 4px;
-  border-bottom: 1px solid var(--border);
-  color: var(--muted);
-  font-weight: 500;
-  text-decoration: none;
-}
-.nav-menu li:last-child a { border-bottom: 0; }
-.nav-menu a:hover,
-.nav-menu a.is-active { color: var(--text); }
-.nav-menu a.is-active { box-shadow: inset 3px 0 0 var(--accent); padding-left: 12px; }
-
-/* Without JavaScript the menu simply stays visible */
-.no-js .nav-toggle { display: none; }
-.no-js .nav-menu { display: flex; flex-wrap: wrap; position: static; gap: 4px 16px; padding: 0; border: 0; background: none; }
-
-/* =========================================================
-   5. HERO
-   ========================================================= */
-.hero {
-  position: relative;
-  overflow: hidden;
-  padding: 56px 0 72px;
-  text-align: center;
-  isolation: isolate;
-}
-/* Faint chart grid */
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  background-image:
-    linear-gradient(to right, rgba(148, 163, 184, 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
-  background-size: 48px 48px;
-  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 40%, #000 30%, transparent 85%);
-  mask-image: radial-gradient(ellipse 75% 70% at 50% 40%, #000 30%, transparent 85%);
-}
-/* Soft colour glow */
-.hero::after {
-  content: "";
-  position: absolute;
-  z-index: -3;
-  left: 50%; top: -10%;
-  width: 760px; height: 520px;
-  transform: translateX(-50%);
-  background: radial-gradient(closest-side, rgba(45, 212, 191, 0.14), rgba(96, 165, 250, 0.06) 55%, transparent);
-  pointer-events: none;
-}
-.hero-chart {
-  position: absolute;
-  z-index: -1;
-  left: 0; right: 0; bottom: 0;
-  width: 100%;
-  height: 44%;
-  pointer-events: none;
-  opacity: 0.55;
-}
-
-.avatar {
-  position: relative;
-  width: 148px; height: 148px;
-  margin: 0 auto 28px;
-  padding: 4px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  box-shadow: 0 0 0 8px rgba(45, 212, 191, 0.07), 0 20px 50px -20px rgba(45, 212, 191, 0.5);
-}
-.avatar-inner {
-  position: relative;
-  width: 100%; height: 100%;
-  border-radius: 50%;
-  overflow: hidden;
-  background: var(--surface);
-  border: 3px solid var(--bg);
-}
-.avatar-initials {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-family: var(--font-head);
-  font-size: 2.75rem;
-  font-weight: 800;
-  color: var(--accent);
-  letter-spacing: 0.02em;
-}
-.avatar img {
-  position: relative;
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
-.avatar.no-photo img { display: none; }
-
-.hero h1 {
-  font-size: clamp(2.375rem, 8vw, 4.25rem);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
-}
-
-.role {
-  margin-top: 14px;
-  font-family: var(--font-head);
-  font-size: clamp(1.125rem, 3vw, 1.5rem);
-  font-weight: 600;
-  min-height: 1.6em;
-}
-.role-text {
-  display: inline-block;
-  color: var(--accent);
-  transition: opacity .45s var(--ease);
-}
-.role-text.is-fading { opacity: 0; }
-
-.tagline {
-  max-width: 36rem;
-  margin: 16px auto 0;
-  color: var(--muted);
-  font-size: clamp(1rem, 2vw, 1.125rem);
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 24px;
-  padding: 6px 14px 6px 12px;
-  border: 1px solid var(--accent-line);
-  border-radius: 999px;
-  background: var(--accent-soft);
-  color: #CCFBF1;
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-}
-.badge-dot {
-  position: relative;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-.badge-dot::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: var(--accent);
-  animation: pulse 2.4s ease-out infinite;
-}
-@keyframes pulse {
-  0% { transform: scale(1); opacity: .7; }
-  80%, 100% { transform: scale(2.6); opacity: 0; }
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 28px;
-}
-
-.hero-social {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 28px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-/* =========================================================
-   6. ABOUT
-   ========================================================= */
-.about-grid { display: grid; gap: 20px; }
-.about-grid .section-head { margin-bottom: 0; }
-.about-copy p { color: #D1D5DB; font-size: 1.0625rem; max-width: 42rem; }
-.about-copy p + p { margin-top: 16px; }
-
-.stats {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin: 36px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.stat {
-  padding: 20px 22px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-}
-.stat-value {
-  display: block;
-  font-family: var(--font-head);
-  font-size: 2.25rem;
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  background: linear-gradient(120deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.stat-value small { font-size: 1.125rem; font-weight: 700; letter-spacing: 0; }
-.stat-label { display: block; margin-top: 4px; color: var(--muted); font-size: 0.9375rem; }
-
-/* =========================================================
-   7. CARDS (shared by skills, projects, education, certifications)
-   ========================================================= */
-.card {
-  position: relative;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-  transition: transform .25s var(--ease), border-color .25s, box-shadow .25s var(--ease);
-}
-.card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent-line);
-  box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.15), 0 18px 40px -22px rgba(45, 212, 191, 0.45);
-}
-
-/* =========================================================
-   8. SKILLS
-   ========================================================= */
-.skills-grid { display: grid; gap: 16px; }
-.skill-card { padding: 22px; }
-.skill-card h3 {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 1.0625rem;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-.skill-card h3 .i {
-  width: 34px; height: 34px;
-  padding: 7px;
-  border-radius: 9px;
-  background: var(--accent-soft);
-  color: var(--accent);
-}
-.skill-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.skill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: rgba(11, 17, 32, 0.6);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text);
-}
-.skill .i,
-.skill [class^="devicon-"] { color: var(--accent); }
-.skill [class^="devicon-"] { font-size: 17px; line-height: 1; }
-
-/* =========================================================
-   9. EXPERIENCE TIMELINE
-   ========================================================= */
-.timeline {
-  position: relative;
-  margin: 0;
-  padding: 0 0 0 28px;
-  list-style: none;
-}
-.timeline::before {
-  content: "";
-  position: absolute;
-  left: 7px; top: 8px; bottom: 8px;
-  width: 2px;
-  background: linear-gradient(var(--accent), var(--border));
-}
-.timeline-item { position: relative; }
-.timeline-item::before {
-  content: "";
-  position: absolute;
-  left: -28px; top: 26px;
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  background: var(--bg);
-  border: 3px solid var(--accent);
-  box-shadow: 0 0 0 5px rgba(45, 212, 191, 0.12);
-}
-.timeline-card { padding: 22px; }
-.timeline-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 12px;
-  margin-bottom: 8px;
-}
-.timeline-card h3 { font-size: 1.25rem; font-weight: 700; }
-.org { margin-top: 4px; color: var(--muted); }
-.timeline-card ul { margin: 16px 0 0; padding-left: 1.1em; color: #D1D5DB; }
-.timeline-card li + li { margin-top: 6px; }
-.timeline-card li::marker { color: var(--accent); }
-.timeline-card .team-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; color: var(--text); }
-
-/* =========================================================
-   10. PROJECTS
-   ========================================================= */
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
-}
-.filter-btn {
-  min-height: 40px;
-  padding: 8px 16px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface);
-  color: var(--muted);
-  font: 500 0.875rem/1 var(--font-body);
-  cursor: pointer;
-  transition: color .2s, border-color .2s, background-color .2s;
-}
-.filter-btn:hover { color: var(--text); border-color: var(--accent-line); }
-.filter-btn[aria-pressed="true"] {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--on-accent);
-  font-weight: 600;
-}
-
-.projects-grid { display: grid; gap: 18px; margin: 0; padding: 0; list-style: none; }
-.projects-grid > li[hidden] { display: none; }
-.project-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-}
-.project-art {
-  aspect-ratio: 16 / 7;
-  border-bottom: 1px solid var(--border);
-  background:
-    radial-gradient(circle at 80% 0%, rgba(96, 165, 250, 0.10), transparent 60%),
-    linear-gradient(180deg, rgba(45, 212, 191, 0.05), transparent);
-}
-.project-art svg { width: 100%; height: 100%; display: block; }
-.project-body {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 20px 22px 22px;
-}
-.project-body h3 { margin-top: 6px; font-size: 1.1875rem; font-weight: 700; }
-.project-label {
-  display: block;
-  margin-top: 16px;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  color: var(--muted);
-}
-.project-body p,
-.project-body ul { font-size: 0.9375rem; color: #D1D5DB; }
-.project-label + p,
-.project-label + ul { margin-top: 4px; }
-.project-body ul { margin-bottom: 0; padding-left: 1.1em; }
-.project-body li + li { margin-top: 4px; }
-.project-body li::marker { color: var(--accent); }
-.project-body .tool-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 0; padding: 0; list-style: none; }
-.project-body .outcome {
-  margin-top: 16px;
-  padding: 10px 12px;
-  border-left: 2px solid var(--accent);
-  border-radius: 0 8px 8px 0;
-  background: var(--accent-soft);
-  color: var(--text);
-}
-.confidential {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: auto;
-  padding-top: 16px;
-  color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-}
-.confidential .i { width: 14px; height: 14px; }
-
-/* =========================================================
-   11. EDUCATION
-   ========================================================= */
-.edu-card { padding: 24px; display: grid; gap: 24px; }
-.edu-main { display: flex; gap: 16px; align-items: flex-start; }
-.edu-icon {
-  display: grid; place-items: center;
-  width: 48px; height: 48px;
-  flex: none;
-  border-radius: 12px;
-  background: var(--accent-soft);
-  color: var(--accent);
-}
-.edu-icon .i { width: 24px; height: 24px; }
-.edu-card h3 { font-size: 1.25rem; font-weight: 700; }
-.edu-status {
-  display: inline-flex;
-  margin-top: 12px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  color: #D1D5DB;
-  font-size: 0.8125rem;
-}
-.edu-sub h4 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
-.edu-sub ul { margin: 0; padding-left: 1.1em; color: #D1D5DB; }
-.edu-sub li + li { margin-top: 8px; }
-.edu-sub li::marker { color: var(--accent); }
-
-/* =========================================================
-   12. CERTIFICATIONS
-   ========================================================= */
-.cert-grid { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; }
-.cert-card { padding: 22px; height: 100%; display: flex; flex-direction: column; gap: 8px; }
-.cert-card h3 { font-size: 1.0625rem; font-weight: 700; }
-.cert-issuer { color: var(--muted); font-size: 0.9375rem; }
-.cert-link {
-  display: inline-flex; align-items: center; gap: 6px;
-  margin-top: auto; padding-top: 8px;
-  font-size: 0.875rem; font-weight: 600;
-  text-decoration: none;
-}
-.cert-link:hover { text-decoration: underline; }
-.cert-link .i { width: 15px; height: 15px; }
-
-/* =========================================================
-   13. TESTIMONIALS
-   ========================================================= */
-.quote-grid { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; }
-.quote-card { padding: 24px; margin: 0; height: 100%; }
-.quote-card blockquote { margin: 0; font-size: 1.0625rem; color: var(--text); }
-.quote-card figcaption { margin-top: 16px; color: var(--muted); font-size: 0.9375rem; }
-.quote-card figcaption strong { display: block; color: var(--text); font-weight: 600; }
-
-/* =========================================================
-   14. CONTACT
-   ========================================================= */
-.contact-panel {
-  position: relative;
-  overflow: hidden;
-  padding: 36px 22px;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  background:
-    radial-gradient(ellipse at 100% 0%, rgba(96, 165, 250, 0.12), transparent 55%),
-    radial-gradient(ellipse at 0% 100%, rgba(45, 212, 191, 0.12), transparent 55%),
-    var(--surface);
-  text-align: center;
-}
-.contact-panel h2 { font-size: clamp(1.75rem, 4.5vw, 2.5rem); font-weight: 800; }
-.contact-panel > p { max-width: 34rem; margin: 12px auto 0; color: var(--muted); font-size: 1.0625rem; }
-.email-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 26px;
-}
-.email-link { word-break: break-all; }
-.copy-status { min-height: 1.5em; margin-top: 10px; color: var(--accent); font-size: 0.875rem; }
-.contact-list {
-  display: grid;
-  gap: 10px;
-  max-width: 720px;
-  margin: 20px auto 0;
-  padding: 0;
-  list-style: none;
-}
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: rgba(11, 17, 32, 0.55);
-  color: var(--text);
-  text-align: left;
-  text-decoration: none;
-  transition: border-color .2s, transform .2s var(--ease);
-}
-a.contact-item:hover { border-color: var(--accent-line); transform: translateY(-2px); }
-.contact-item > .i,
-.contact-item > i { color: var(--accent); font-size: 1.25rem; width: 20px; height: 20px; }
-.contact-item span { display: block; font-size: 0.75rem; color: var(--muted); font-family: var(--font-mono); }
-.contact-item strong { display: block; font-weight: 500; font-size: 0.9375rem; word-break: break-word; }
-
-/* =========================================================
-   15. FOOTER
-   ========================================================= */
-.site-footer { border-top: 1px solid var(--border); padding: 28px 0; }
-.footer-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  text-align: center;
-}
-.footer-inner p { color: var(--muted); font-size: 0.875rem; }
-.footer-links { display: flex; gap: 10px; margin: 0; padding: 0; list-style: none; }
-.footer-links .icon-btn { width: 40px; height: 40px; font-size: 1rem; }
-
-/* =========================================================
-   16. SCROLL REVEAL
-   ========================================================= */
-.js .reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity .7s var(--ease), transform .7s var(--ease);
-}
-.js .reveal.is-visible { opacity: 1; transform: none; }
-
-/* =========================================================
-   17. RESPONSIVE  (mobile first: 360 → 768 → 1024 → 1440)
-   ========================================================= */
-@media (max-width: 479px) {
-  .hero-actions { display: grid; grid-template-columns: 1fr 1fr; }
-  .hero-actions .btn-primary { grid-column: 1 / -1; }
-  .hero-chart { height: 30%; opacity: 0.4; }
-}
-
-@media (min-width: 480px) {
-  .stats { grid-template-columns: repeat(3, 1fr); }
-  .contact-list { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (min-width: 768px) {
-  .container { padding: 0 32px; }
-  .section { padding: 96px 0; }
-  .hero { padding: 80px 0 104px; }
-  .avatar { width: 168px; height: 168px; }
-  .skills-grid,
-  .projects-grid,
-  .cert-grid,
-  .quote-grid { grid-template-columns: repeat(2, 1fr); }
-  .contact-panel { padding: 56px 40px; }
-  .edu-card { grid-template-columns: 1.2fr 1fr; padding: 32px; gap: 40px; }
-  .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; }
-}
-
-@media (min-width: 1024px) {
-  .logo-name { display: inline; }
-  .nav-toggle { display: none; }
-  .nav-menu,
-  .nav-menu.is-open {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    position: static;
-    max-height: none;
-    overflow: visible;
-    padding: 0;
-    background: none;
-    border: 0;
-  }
-  .nav-menu a {
-    position: relative;
-    padding: 8px 12px;
-    border: 0;
-    border-radius: 8px;
-    font-size: 0.9375rem;
-  }
-  .nav-menu a.is-active { box-shadow: none; padding-left: 12px; }
-  .nav-menu a::after {
-    content: "";
-    position: absolute;
-    left: 12px; right: 12px; bottom: 2px;
-    height: 2px;
-    border-radius: 2px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transition: transform .25s var(--ease);
-  }
-  .nav-menu a.is-active::after { transform: scaleX(1); }
-
-  .about-grid { grid-template-columns: 1fr 1.6fr; gap: 64px; align-items: start; }
-  .skills-grid { grid-template-columns: repeat(6, 1fr); }
-  .skills-grid > .skill-card { grid-column: span 2; }
-  .skills-grid > .skill-card:nth-child(4),
-  .skills-grid > .skill-card:nth-child(5) { grid-column: span 3; }
-  .projects-grid,
-  .cert-grid,
-  .quote-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (min-width: 1440px) {
-  :root { --maxw: 1240px; }
-}
-
-/* =========================================================
-   18. REDUCED MOTION  (disables all motion)
-   ========================================================= */
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-  }
-  .js .reveal { opacity: 1; transform: none; }
-  .card:hover, .btn:hover, .icon-btn:hover, a.contact-item:hover { transform: none; }
-}
-</style>
+<script src="js/vendor/gsap.min.js" defer></script>
+<script src="js/vendor/ScrollTrigger.min.js" defer></script>
+<script src="js/vendor/lenis.min.js" defer></script>
+<script src="js/terrain.js" defer></script>
+<script src="js/main.js" defer></script>
 </head>
 <body>
 
-<!-- ============ SVG ICON SPRITE (line icons for tools Devicon doesn't include) ============ -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <symbol id="i-bars" viewBox="0 0 24 24"><path d="M3 20h18"/><path d="M6 16v-5"/><path d="M10.5 16V6"/><path d="M15 16V9"/><path d="M19.5 16v-3"/></symbol>
-  <symbol id="i-fx" viewBox="0 0 24 24"><path d="M7 20c1.8 0 2.4-1.4 2.8-3.6L11.6 7c.4-2 1.1-3 2.9-3"/><path d="M7.5 10h6"/><path d="M15 13l5 6"/><path d="M20 13l-5 6"/></symbol>
-  <symbol id="i-funnel" viewBox="0 0 24 24"><path d="M3 5h18l-7 8.5V19l-4 2v-7.5z"/></symbol>
-  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M3 15h18"/><path d="M9 4v16"/></symbol>
-  <symbol id="i-pivot" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 3v18"/><path d="M13 16h5"/><path d="M16 13.5l2 2.5-2 2.5"/></symbol>
-  <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/><path d="M14 4l-4 16"/></symbol>
-  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v13c0 1.7 3.6 3 8 3s8-1.3 8-3v-13"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
-  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
-  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M3 20h18"/><path d="M3 19c3.2 0 4.2-13 9-13s5.8 13 9 13"/><path d="M12 6v14" opacity=".45"/></symbol>
-  <symbol id="i-present" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4"/><path d="M8 20h8"/><path d="M7 12l3-3 2 2 4-4"/></symbol>
-  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
-  <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3"/><path d="M12 15h5"/></symbol>
-  <symbol id="i-sigma" viewBox="0 0 24 24"><path d="M18 5H6l6 7-6 7h12"/></symbol>
-  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></symbol>
-  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></symbol>
-  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
-  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></symbol>
-  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></symbol>
-  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
-  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></symbol>
-  <symbol id="i-cap" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/><path d="M22 9v5"/></symbol>
-  <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
-  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></symbol>
+<!-- Icons: Lucide (ISC) and Devicon (MIT) -->
+<svg class="sprite" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7" /> <path d="M12 19V5" /></symbol>
+  <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 7h10v10" /> <path d="M7 17 17 7" /></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" /> <circle cx="12" cy="8" r="6" /></symbol>
+  <symbol id="i-book-open-text" viewBox="0 0 24 24"><path d="M12 5v16" /> <path d="M16 13h2" /> <path d="M16 9h2" /> <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /> <path d="M6 13h2" /> <path d="M6 9h2" /></symbol>
+  <symbol id="i-briefcase-business" viewBox="0 0 24 24"><path d="M12 12h.01" /> <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /> <path d="M22 13a18.15 18.15 0 0 1-20 0" /> <rect width="20" height="14" x="2" y="6" rx="2" /></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v3" /> <path d="M16 2v3" /> <rect x="3" y="3" width="18" height="18" rx="2" /> <path d="M3 9h18" /></symbol>
+  <symbol id="i-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="M18 17V9" /> <path d="M13 17V5" /> <path d="M8 17v-3" /></symbol>
+  <symbol id="i-chart-pie" viewBox="0 0 24 24"><path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z" /> <path d="M21.21 15.89A10 10 0 1 1 8 2.83" /></symbol>
+  <symbol id="i-chart-scatter" viewBox="0 0 24 24"><circle cx="7.5" cy="7.5" r=".5" fill="currentColor" /> <circle cx="18.5" cy="5.5" r=".5" fill="currentColor" /> <circle cx="11.5" cy="11.5" r=".5" fill="currentColor" /> <circle cx="7.5" cy="16.5" r=".5" fill="currentColor" /> <circle cx="17.5" cy="14.5" r=".5" fill="currentColor" /> <path d="M3 3v16a2 2 0 0 0 2 2h16" /></symbol>
+  <symbol id="i-chart-spline" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="M7 16c.5-2 1.5-7 4-7 2 0 2 3 4 3 2.5 0 4.5-5 5-7" /></symbol>
+  <symbol id="i-code-xml" viewBox="0 0 24 24"><path d="m18 16 4-4-4-4" /> <path d="m6 8-4 4 4 4" /> <path d="m14.5 4-5 16" /></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /> <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3" /> <path d="M3 5V19A9 3 0 0 0 21 19V5" /> <path d="M3 12A9 3 0 0 0 21 12" /></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 15V3" /> <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <path d="m7 10 5 5 5-5" /></symbol>
+  <symbol id="i-file-code" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <path d="M10 12.5 8 15l2 2.5" /> <path d="m14 12.5 2 2.5-2 2.5" /></symbol>
+  <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></symbol>
+  <symbol id="i-funnel" viewBox="0 0 24 24"><path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z" /></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4" /> <path d="M3.34 19a10 10 0 1 1 17.32 0" /></symbol>
+  <symbol id="i-github" viewBox="0 0 128 128"><g><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M64 5.103c-33.347 0-60.388 27.035-60.388 60.388 0 26.682 17.303 49.317 41.297 57.303 3.017.56 4.125-1.31 4.125-2.905 0-1.44-.056-6.197-.082-11.243-16.8 3.653-20.345-7.125-20.345-7.125-2.747-6.98-6.705-8.836-6.705-8.836-5.48-3.748.413-3.67.413-3.67 6.063.425 9.257 6.223 9.257 6.223 5.386 9.23 14.127 6.562 17.573 5.02.542-3.903 2.107-6.568 3.834-8.076-13.413-1.525-27.514-6.704-27.514-29.843 0-6.593 2.36-11.98 6.223-16.21-.628-1.52-2.695-7.662.584-15.98 0 0 5.07-1.623 16.61 6.19C53.7 35 58.867 34.327 64 34.304c5.13.023 10.3.694 15.127 2.033 11.526-7.813 16.59-6.19 16.59-6.19 3.287 8.317 1.22 14.46.593 15.98 3.872 4.23 6.215 9.617 6.215 16.21 0 23.194-14.127 28.3-27.574 29.796 2.167 1.874 4.097 5.55 4.097 11.183 0 8.08-.07 14.583-.07 16.572 0 1.607 1.088 3.49 4.148 2.897 23.98-7.994 41.263-30.622 41.263-57.294C124.388 32.14 97.35 5.104 64 5.104z"/><path fill="currentColor" d="M26.484 91.806c-.133.3-.605.39-1.035.185-.44-.196-.685-.605-.543-.906.13-.31.603-.395 1.04-.188.44.197.69.61.537.91zm2.446 2.729c-.287.267-.85.143-1.232-.28-.396-.42-.47-.983-.177-1.254.298-.266.844-.14 1.24.28.394.426.472.984.17 1.255zM31.312 98.012c-.37.258-.976.017-1.35-.52-.37-.538-.37-1.183.01-1.44.373-.258.97-.025 1.35.507.368.545.368 1.19-.01 1.452zm3.261 3.361c-.33.365-1.036.267-1.552-.23-.527-.487-.674-1.18-.343-1.544.336-.366 1.045-.264 1.564.23.527.486.686 1.18.333 1.543zm4.5 1.951c-.147.473-.825.688-1.51.486-.683-.207-1.13-.76-.99-1.238.14-.477.823-.7 1.512-.485.683.206 1.13.756.988 1.237zm4.943.361c.017.498-.563.91-1.28.92-.723.017-1.308-.387-1.315-.877 0-.503.568-.91 1.29-.924.717-.013 1.306.387 1.306.88zm4.598-.782c.086.485-.413.984-1.126 1.117-.7.13-1.35-.172-1.44-.653-.086-.498.422-.997 1.122-1.126.714-.123 1.354.17 1.444.663zm0 0"/></g></symbol>
+  <symbol id="i-graduation-cap" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" /> <path d="M22 10v6" /> <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" /></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 128 128"><path fill="currentColor" d="M116 3H12a8.91 8.91 0 00-9 8.8v104.42a8.91 8.91 0 009 8.78h104a8.93 8.93 0 009-8.81V11.77A8.93 8.93 0 00116 3zM39.17 107H21.06V48.73h18.11zm-9-66.21a10.5 10.5 0 1110.49-10.5 10.5 10.5 0 01-10.54 10.48zM107 107H88.89V78.65c0-6.75-.12-15.44-9.41-15.44s-10.87 7.36-10.87 15V107H50.53V48.73h17.36v8h.24c2.42-4.58 8.32-9.41 17.13-9.41C103.6 47.28 107 59.35 107 75z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /> <path d="M7 11V7a5 5 0 0 1 10 0v4" /></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" /> <rect x="2" y="4" width="20" height="16" rx="2" /></symbol>
+  <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /></symbol>
+  <symbol id="i-matlab" viewBox="0 0 128 128"><path fill="currentColor" d="M123.965 91.902c-7.246-18.297-13.262-37.058-20.184-55.476-3.054-7.84-6.047-15.746-10.215-23.082-1.656-2.633-3.238-5.528-5.953-7.215a4.013 4.013 0 00-2.222-.606c-1.27.028-2.536.594-3.504 1.415-3.645 2.886-5.805 7.082-8.227 10.949-4.277 7.172-8.789 14.687-15.941 19.347-3.36 2.371-7.762 2.63-11 5.172-4.43 3.34-7.442 8.078-11.074 12.184-.829.988-2.11 1.383-3.227 1.918C21.578 60.93 10.738 65.336 0 69.98c9.09 7.032 18.777 13.29 28.05 20.079 2.544-.504 5.098-1.547 7.72-1.082 4.16 1.3 6.597 5.285 8.503 8.93 3.875 7.94 6.676 16.323 9.813 24.57 5.246-.375 9.969-3.079 14.027-6.258 7.809-6.324 13.758-14.5 20.305-22.047 3.14-3.3 6.34-7.23 11.05-8.149 4.762-1.152 9.864.555 13.395 3.836 4.957 4.43 9.344 9.551 15.137 12.942-.777-3.836-2.645-7.278-4.035-10.899zM42.96 79.012c-4.57 2.703-9.426 4.93-14.176 7.289-7.457-4.996-14.723-10.29-22.05-15.465 9.878-4.328 19.91-8.348 29.917-12.387 4.746 3.703 9.637 7.223 14.383 10.926-2.23 3.563-4.914 6.871-8.074 9.637zm10.168-12.414C48.414 63.058 43.64 59.609 39 55.977c2.977-4.055 6.238-7.977 10.14-11.172 2.587-1.657 5.743-2.117 8.426-3.61 6.368-3.18 10.711-9.011 14.86-14.582-5.317 13.805-10.992 27.664-19.297 39.985zm0 0"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 19v3" /> <path d="M19 10v2a7 7 0 0 1-14 0v-2" /> <rect x="9" y="2" width="6" height="13" rx="3" /></symbol>
+  <symbol id="i-presentation" viewBox="0 0 24 24"><path d="M2 3h20" /> <path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /> <path d="m7 21 5-5 5 5" /></symbol>
+  <symbol id="i-python" viewBox="0 0 128 128"><path fill="currentColor" d="M49.33 62h29.159C86.606 62 93 55.132 93 46.981V19.183c0-7.912-6.632-13.856-14.555-15.176-5.014-.835-10.195-1.215-15.187-1.191-4.99.023-9.612.448-13.805 1.191C37.098 6.188 35 10.758 35 19.183V30h29v4H23.776c-8.484 0-15.914 5.108-18.237 14.811-2.681 11.12-2.8 17.919 0 29.53C7.614 86.983 12.569 93 21.054 93H31V79.952C31 70.315 39.428 62 49.33 62zm-1.838-39.11c-3.026 0-5.478-2.479-5.478-5.545 0-3.079 2.451-5.581 5.478-5.581 3.015 0 5.479 2.502 5.479 5.581-.001 3.066-2.465 5.545-5.479 5.545zm74.789 25.921C120.183 40.363 116.178 34 107.682 34H97v12.981C97 57.031 88.206 65 78.489 65H49.33C41.342 65 35 72.326 35 80.326v27.8c0 7.91 6.745 12.564 14.462 14.834 9.242 2.717 17.994 3.208 29.051 0C85.862 120.831 93 116.549 93 108.126V97H64v-4h43.682c8.484 0 11.647-5.776 14.599-14.66 3.047-9.145 2.916-17.799 0-29.529zm-41.955 55.606c3.027 0 5.479 2.479 5.479 5.547 0 3.076-2.451 5.579-5.479 5.579-3.015 0-5.478-2.502-5.478-5.579 0-3.068 2.463-5.547 5.478-5.547z"/></symbol>
+  <symbol id="i-r" viewBox="0 0 128 128"><path fill="currentColor" d="M64 14.6465v.002c-35.346 0-64 19.1902-64 42.8632 0 20.764 22.0464 38.0766 51.3164 42.0176v-12.83c-15.55-4.89-26.166-14.6943-26.166-25.9923 0-16.183 21.7795-29.3027 48.6465-29.3027 26.866 0 46.6914 8.9748 46.6914 29.3027 0 10.486-5.2715 17.9507-14.0645 22.7207 1.204.908 2.2184 2.073 2.9024 3.42l.3886.6543C121.0248 79.772 128 69.1888 128 57.5098c0-23.672-28.654-42.8633-64-42.8633zM52.7363 41.2637v72.084l21.834-.0098-.0039-28.2188h5.8613c1.199 0 1.7167.3481 2.9297 1.3301 1.454 1.177 3.8164 5.2383 3.8164 5.2383l11.5371 21.666 24.6739-.0097-15.2657-25.7403a8.388 8.388 0 0 0-1.4199-2.041c-.974-1.036-2.3255-1.8227-3.1055-2.2188-2.249-1.1375-6.12-2.3076-6.123-2.3085 0 0 19.08-1.4151 19.08-20.4141 0-18.999-19.9706-19.3574-19.9706-19.3574H52.7363zm22.0176 15.627 13.2188.0077s6.123-.3302 6.123 6.0098c0 6.216-6.123 6.2344-6.123 6.2344l-13.2247.0039.006-12.2559zm9.3457 32.6366c-2.612.257-5.3213.411-8.1133.463l.002 9.6288a88.362 88.362 0 0 0 12.4746-2.4902l-.502-.9414c-.68-1.268-1.3472-2.5426-2.0332-3.8066a41.01 41.01 0 0 0-1.828-2.8516v-.002z"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3" /> <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" /> <circle cx="18" cy="5" r="3" /></symbol>
+  <symbol id="i-scan-search" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2" /> <path d="M17 3h2a2 2 0 0 1 2 2v2" /> <path d="M21 17v2a2 2 0 0 1-2 2h-2" /> <path d="M7 21H5a2 2 0 0 1-2-2v-2" /> <circle cx="12" cy="12" r="3" /> <path d="m16 16-1.9-1.9" /></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /> <path d="m21.854 2.147-10.94 10.939" /></symbol>
+  <symbol id="i-sheet" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /> <line x1="3" x2="21" y1="9" y2="9" /> <line x1="3" x2="21" y1="15" y2="15" /> <line x1="9" x2="9" y1="9" y2="21" /> <line x1="15" x2="15" y1="9" y2="21" /></symbol>
+  <symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></symbol>
+  <symbol id="i-sigma" viewBox="0 0 24 24"><path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2" /></symbol>
+  <symbol id="i-square-function" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /> <path d="M9 17c2 0 2.8-1 2.8-2.8V10c0-2 1-3.3 3.2-3" /> <path d="M9 11.2h5.7" /></symbol>
+  <symbol id="i-table-2" viewBox="0 0 24 24"><path d="M3 9h18" /> <path d="M9 3v18" /> <rect x="3" y="3" width="18" height="18" rx="2" /></symbol>
+  <symbol id="i-table-properties" viewBox="0 0 24 24"><path d="M15 3v18" /> <rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M21 9H3" /> <path d="M21 15H3" /></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="6" /> <circle cx="12" cy="12" r="2" /></symbol>
+  <symbol id="i-type" viewBox="0 0 24 24"><path d="M12 4v16" /> <path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2" /> <path d="M9 20h6" /></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /> <path d="M16 3.128a4 4 0 0 1 0 7.744" /> <path d="M22 21v-2a4 4 0 0 0-3-3.87" /> <circle cx="9" cy="7" r="4" /></symbol>
+  <symbol id="i-workflow" viewBox="0 0 24 24"><rect width="8" height="8" x="3" y="3" rx="2" /> <path d="M7 11v4a2 2 0 0 0 2 2h4" /> <rect width="8" height="8" x="13" y="13" rx="2" /></symbol>
 </svg>
 
 <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- =========================================================
-     1. NAVIGATION
-     ========================================================= -->
-<header class="site-header" id="top">
-  <div class="container nav">
-    <a class="logo" href="#home" aria-label="Chirantha Ekanayake, back to top">
-      <span class="monogram" aria-hidden="true">CE</span>
-      <span class="logo-name" aria-hidden="true">Chirantha Ekanayake</span>
+<!-- ===================== INTRO (shown once per visit) ===================== -->
+<div class="intro" aria-hidden="true">
+  <svg class="intro-mark" viewBox="0 0 120 120">
+    <defs>
+      <linearGradient id="introGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#A5A6FF"/>
+      </linearGradient>
+    </defs>
+    <rect class="intro-frame" x="4" y="4" width="112" height="112" rx="30" pathLength="1"/>
+    <text x="60" y="73" text-anchor="middle">CE</text>
+  </svg>
+  <div class="intro-bar"><span></span></div>
+</div>
+
+<!-- ===================== AMBIENT BACKGROUND ===================== -->
+<div class="atmosphere" aria-hidden="true">
+  <span class="aurora aurora-a"></span>
+  <span class="aurora aurora-b"></span>
+  <span class="aurora aurora-c"></span>
+</div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor-light" aria-hidden="true"></div>
+
+<!-- ===================== NAVIGATION ===================== -->
+<header class="site-header">
+  <nav class="nav glass" aria-label="Main">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">CE</span>
+      <span class="brand-name">Chirantha Ekanayake</span><span class="sr-only">, back to top</span>
     </a>
 
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
-      <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
-    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#highlights">Highlights</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li class="nav-indicator" aria-hidden="true"></li>
+    </ul>
 
-    <nav aria-label="Main">
-      <ul class="nav-menu" id="nav-menu">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#certifications">Certifications</a></li>
-        <!-- TESTIMONIALS NAV LINK: hidden until the Testimonials section is enabled. Remove these comment markers to show it.
-        <li><a href="#testimonials">Testimonials</a></li>
-        -->
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <a class="btn btn-small btn-ghost nav-cv" href="assets/Chirantha_Ekanayake_CV.pdf" download>
+      <svg class="ico" aria-hidden="true"><use href="#i-download"/></svg><span>CV</span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="sr-only">Open menu</span>
+      <span class="menu-lines" aria-hidden="true"><span></span><span></span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <ul class="mobile-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#highlights">Highlights</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="mobile-foot">
+      <a class="btn btn-primary" href="assets/Chirantha_Ekanayake_CV.pdf" download>
+        <svg class="ico" aria-hidden="true"><use href="#i-download"/></svg>Download CV
+      </a>
+      <div class="social-row">
+        <a class="icon-link" href="https://www.linkedin.com/in/chiranthaekanayake" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="ico ico-fill" aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+        <a class="icon-link" href="https://github.com/Chirantha98" target="_blank" rel="noopener" aria-label="GitHub (opens in a new tab)"><svg class="ico ico-fill" aria-hidden="true"><use href="#i-github"/></svg></a>
+        <a class="icon-link" href="mailto:chiranthag20@gmail.com" aria-label="Email Chirantha"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg></a>
+      </div>
+    </div>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- =========================================================
-       2. HERO
-       ========================================================= -->
-  <section class="hero" id="home" aria-labelledby="hero-title">
-    <svg class="hero-chart" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-      <defs>
-        <linearGradient id="heroArea" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#2DD4BF" stop-opacity=".16"/>
-          <stop offset="1" stop-color="#2DD4BF" stop-opacity="0"/>
-        </linearGradient>
-        <linearGradient id="heroLine" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#2DD4BF" stop-opacity="0"/>
-          <stop offset=".2" stop-color="#2DD4BF" stop-opacity=".5"/>
-          <stop offset=".8" stop-color="#60A5FA" stop-opacity=".5"/>
-          <stop offset="1" stop-color="#60A5FA" stop-opacity="0"/>
-        </linearGradient>
-      </defs>
-      <path d="M0 230 C80 220 120 180 200 190 S320 240 400 200 S520 120 600 140 S720 210 800 170 S920 90 1000 110 S1120 150 1200 120 L1200 300 L0 300 Z" fill="url(#heroArea)"/>
-      <path d="M0 230 C80 220 120 180 200 190 S320 240 400 200 S520 120 600 140 S720 210 800 170 S920 90 1000 110 S1120 150 1200 120" fill="none" stroke="url(#heroLine)" stroke-width="2" vector-effect="non-scaling-stroke"/>
-    </svg>
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <canvas class="terrain" aria-hidden="true"></canvas>
+    <div class="hero-grid" aria-hidden="true"></div>
 
-    <div class="container">
-      <div class="avatar" id="avatar">
-        <div class="avatar-inner">
-          <span class="avatar-initials" aria-hidden="true">CE</span>
-          <!-- Add your photo as assets/profile.jpg (square, at least 400×400px) -->
-          <img src="assets/profile.jpg" alt="Portrait of Chirantha Ekanayake" width="168" height="168" fetchpriority="high" decoding="async" onerror="this.closest('.avatar').classList.add('no-photo')">
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <p class="status" data-hero><span class="status-dot" aria-hidden="true"></span>Open to entry-level roles</p>
+
+        <h1 class="hero-title" id="hero-title">
+          <span class="sr-only">Chirantha Ekanayake</span>
+          <span class="title-line" aria-hidden="true" data-split>Chirantha</span>
+          <span class="title-line title-line-2" aria-hidden="true" data-split>Ekanayake</span>
+        </h1>
+
+        <p class="hero-role" data-hero>
+          <span class="sr-only">Data Analyst, BI Analyst and Demand &amp; Supply Planning Analyst</span>
+          <span class="role-track" aria-hidden="true"><span class="role-text">Data Analyst</span></span>
+        </p>
+
+        <p class="hero-lede" data-hero>I turn quality and production data into clear, decision&#8209;ready insight, with Power BI, statistics and a habit of automating the repetitive.</p>
+
+        <div class="hero-actions" data-hero>
+          <a class="btn btn-primary" href="#work" data-magnetic><span>Explore my work</span></a>
+          <a class="btn btn-ghost" href="assets/Chirantha_Ekanayake_CV.pdf" download data-magnetic>
+            <svg class="ico" aria-hidden="true"><use href="#i-download"/></svg><span>Download CV</span>
+          </a>
+        </div>
+
+        <ul class="hero-social" data-hero>
+          <li><a class="icon-link" href="https://www.linkedin.com/in/chiranthaekanayake" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="ico ico-fill" aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
+          <li><a class="icon-link" href="https://github.com/Chirantha98" target="_blank" rel="noopener" aria-label="GitHub (opens in a new tab)"><svg class="ico ico-fill" aria-hidden="true"><use href="#i-github"/></svg></a></li>
+          <li><a class="icon-link" href="mailto:chiranthag20@gmail.com" aria-label="Email Chirantha"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg></a></li>
+          <li class="hero-location"><svg class="ico" aria-hidden="true"><use href="#i-map-pin"/></svg>Matara, Sri Lanka</li>
+        </ul>
+      </div>
+
+      <!-- 3D portrait stage: layers sit at different depths and tilt with the pointer -->
+      <div class="stage" data-stage>
+        <div class="stage-inner">
+          <div class="layer stage-glow" aria-hidden="true"></div>
+
+          <svg class="layer orbits orbits-back" viewBox="0 0 600 600" aria-hidden="true">
+            <defs>
+              <linearGradient id="orbitGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#5EEAD4" stop-opacity=".1"/>
+                <stop offset=".5" stop-color="#7DD3FC" stop-opacity=".9"/>
+                <stop offset="1" stop-color="#A5A6FF" stop-opacity=".2"/>
+              </linearGradient>
+              <clipPath id="clipBack" clipPathUnits="userSpaceOnUse"><rect x="-100" y="-100" width="800" height="400"/></clipPath>
+              <clipPath id="clipFront" clipPathUnits="userSpaceOnUse"><rect x="-100" y="300" width="800" height="400"/></clipPath>
+              <path id="orbitPath1" d="M40 300a260 78 0 1 0 520 0a260 78 0 1 0-520 0"/>
+              <path id="orbitPath2" d="M80 300a220 120 0 1 0 440 0a220 120 0 1 0-440 0"/>
+            </defs>
+            <g transform="rotate(-14 300 300)" clip-path="url(#clipBack)">
+              <path class="orbit-line" pathLength="1" d="M40 300a260 78 0 1 0 520 0a260 78 0 1 0-520 0"/>
+              <circle class="satellite" r="5"><animateMotion dur="14s" repeatCount="indefinite" rotate="auto"><mpath href="#orbitPath1"/></animateMotion></circle>
+            </g>
+            <g transform="rotate(18 300 300)" clip-path="url(#clipBack)">
+              <path class="orbit-line orbit-line-dim" pathLength="1" d="M80 300a220 120 0 1 0 440 0a220 120 0 1 0-440 0"/>
+              <circle class="satellite satellite-iris" r="4"><animateMotion dur="19s" begin="-6s" repeatCount="indefinite"><mpath href="#orbitPath2"/></animateMotion></circle>
+            </g>
+          </svg>
+
+          <div class="layer portal" aria-hidden="true">
+            <span class="portal-rings"></span>
+            <span class="portal-sheen"></span>
+          </div>
+
+          <div class="layer portrait-wrap">
+            <img class="portrait" src="assets/portrait-cutout.webp" width="760" height="975" alt="Chirantha Ekanayake in a navy suit, smiling" decoding="async" fetchpriority="high" onerror="this.closest('.stage').classList.add('no-photo')">
+            <span class="portrait-fallback" aria-hidden="true">CE</span>
+          </div>
+
+          <svg class="layer orbits orbits-front" viewBox="0 0 600 600" aria-hidden="true">
+            <g transform="rotate(-14 300 300)" clip-path="url(#clipFront)">
+              <path class="orbit-line" pathLength="1" d="M40 300a260 78 0 1 0 520 0a260 78 0 1 0-520 0"/>
+              <circle class="satellite" r="5"><animateMotion dur="14s" repeatCount="indefinite"><mpath href="#orbitPath1"/></animateMotion></circle>
+            </g>
+            <g transform="rotate(18 300 300)" clip-path="url(#clipFront)">
+              <path class="orbit-line orbit-line-dim" pathLength="1" d="M80 300a220 120 0 1 0 440 0a220 120 0 1 0-440 0"/>
+              <circle class="satellite satellite-iris" r="4"><animateMotion dur="19s" begin="-6s" repeatCount="indefinite"><mpath href="#orbitPath2"/></animateMotion></circle>
+            </g>
+          </svg>
+
+          <div class="layer chips" aria-hidden="true">
+            <span class="chip-float chip-a"><svg class="ico" aria-hidden="true"><use href="#i-chart-column"/></svg>Power BI</span>
+            <span class="chip-float chip-b"><svg class="ico ico-fill" aria-hidden="true"><use href="#i-r"/></svg>R</span>
+            <span class="chip-float chip-c"><svg class="ico" aria-hidden="true"><use href="#i-database"/></svg>SQL</span>
+            <span class="chip-float chip-d"><svg class="ico ico-fill" aria-hidden="true"><use href="#i-python"/></svg>Python</span>
+          </div>
         </div>
       </div>
-
-      <h1 id="hero-title">Chirantha Ekanayake</h1>
-
-      <p class="role">
-        <span class="sr-only">Data Analyst, BI Analyst and Demand/Supply Planning Analyst</span>
-        <span class="role-text" id="role-text" aria-hidden="true">Data Analyst</span>
-      </p>
-
-      <p class="tagline">I turn manufacturing and quality data into clear dashboards and analysis that teams can act on.</p>
-
-      <p class="badge"><span class="badge-dot" aria-hidden="true"></span>Open to entry-level opportunities</p>
-
-      <div class="hero-actions">
-        <!-- Add your CV as assets/Chirantha_Ekanayake_CV.pdf -->
-        <a class="btn btn-primary" href="assets/Chirantha_Ekanayake_CV.pdf" download>
-          <svg class="i" aria-hidden="true" focusable="false"><use href="#i-download"/></svg>Download CV
-        </a>
-        <a class="btn" href="#projects">View Projects</a>
-        <a class="btn" href="#contact">Contact Me</a>
-      </div>
-
-      <ul class="hero-social">
-        <li><a class="icon-btn" href="https://www.linkedin.com/in/chiranthaekanayake" target="_blank" rel="noopener" aria-label="LinkedIn profile (opens in a new tab)"><i class="devicon-linkedin-plain" aria-hidden="true"></i></a></li>
-        <li><a class="icon-btn" href="https://github.com/Chirantha98" target="_blank" rel="noopener" aria-label="GitHub profile (opens in a new tab)"><i class="devicon-github-original" aria-hidden="true"></i></a></li>
-        <li><a class="icon-btn" href="mailto:chiranthag20@gmail.com" aria-label="Email Chirantha"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a></li>
-      </ul>
     </div>
+
+    <a class="scroll-cue" href="#about" aria-label="Scroll to About">
+      <span class="scroll-cue-line" aria-hidden="true"></span>
+    </a>
   </section>
 
-  <!-- =========================================================
-       3. ABOUT
-       ========================================================= -->
+  <!-- ===================== ABOUT ===================== -->
   <section class="section" id="about" aria-labelledby="about-title">
     <div class="container">
-      <div class="about-grid">
-        <div class="section-head reveal">
-          <h2 id="about-title">About me</h2>
-          <p>Statistics by training, quality analytics in practice.</p>
+      <div class="about-layout">
+        <div class="section-head">
+          <p class="section-kicker">About</p>
+          <h2 id="about-title" data-split-words>Statistics by training. Operations by experience.</h2>
         </div>
         <div class="about-copy reveal">
-          <p>I'm completing a BSc (Hons) in Financial Mathematics and Industrial Statistics at the University of Ruhuna. I have finished all my degree requirements and am awaiting graduation. The degree gave me a grounding in statistical modelling and quantitative methods that I now apply to real operational data.</p>
-          <p>From April to October 2026 I worked as a Data Analyst Intern in the Quality Assurance team at MAS Active – Linea Intimo, Biyagama. I ran internal craftsmanship audits, built Power BI dashboards for sewing quality, fabric inspection and QCO team performance, and analysed inspection team utilisation alongside the QA, Sewing Operations, IE, PCU and Technical teams.</p>
-          <p>I'm now looking for an entry-level role as a Data Analyst, BI Analyst or Demand/Supply Planning Analyst, where I can keep turning operational data into clear reporting that supports everyday decisions.</p>
+          <p class="about-lead">I'm a final-year student of Financial Mathematics and Industrial Statistics at the University of Ruhuna. I've completed all my degree requirements and I'm awaiting graduation.</p>
+          <p>From April to October 2026 I worked as a Data Analyst Intern in the Quality Assurance team at MAS Active – Linea Intimo, Biyagama. I built Power BI dashboards for sewing quality, fabric inspection and quick changeover performance, automated Excel workflows for inspection staffing, and ran craftsmanship audits across 10 styles.</p>
+          <p>Next, I want to do this work full-time as a Data Analyst, BI Analyst or Demand/Supply Planning Analyst: using data to improve planning, make better use of resources and support everyday operational decisions.</p>
         </div>
       </div>
 
-      <ul class="stats reveal">
-        <li class="stat"><span class="stat-value">6 <small>months</small></span><span class="stat-label">Internship at MAS Active</span></li>
-        <li class="stat"><span class="stat-value">5</span><span class="stat-label">Internship projects</span></li>
-        <li class="stat"><span class="stat-value">5</span><span class="stat-label">Cross-functional teams</span></li>
+      <ul class="approach-grid">
+        <li class="approach glass spot reveal">
+          <span class="approach-icon"><svg class="ico" aria-hidden="true"><use href="#i-sigma"/></svg></span>
+          <h3>Rigorous by default</h3>
+          <p>I check assumptions and model fit before I trust a result, from residual diagnostics to ROC curves.</p>
+        </li>
+        <li class="approach glass spot reveal">
+          <span class="approach-icon"><svg class="ico" aria-hidden="true"><use href="#i-users"/></svg></span>
+          <h3>Close to the floor</h3>
+          <p>My analysis started on the production floor, working with the QA, sewing, IE, PCU and technical teams.</p>
+        </li>
+        <li class="approach glass spot reveal">
+          <span class="approach-icon"><svg class="ico" aria-hidden="true"><use href="#i-presentation"/></svg></span>
+          <h3>Built for decisions</h3>
+          <p>I design dashboards and reports around the decision they support, and present findings to management.</p>
+        </li>
+        <li class="approach glass spot reveal">
+          <span class="approach-icon"><svg class="ico" aria-hidden="true"><use href="#i-workflow"/></svg></span>
+          <h3>Automate the repetitive</h3>
+          <p>If a calculation runs every day, I script it. My SMV-based staffing workbook rebuilds itself from the sewing plan.</p>
+        </li>
       </ul>
     </div>
   </section>
 
-  <!-- =========================================================
-       4. SKILLS
-       ========================================================= -->
+  <!-- ===================== SKILLS ===================== -->
   <section class="section" id="skills" aria-labelledby="skills-title">
     <div class="container">
-      <div class="section-head reveal">
-        <h2 id="skills-title">Skills</h2>
-        <p>The tools and methods I use to collect, model and present data.</p>
+      <div class="section-head section-head-wide">
+        <p class="section-kicker">Skills</p>
+        <h2 id="skills-title" data-split-words>From raw data to a clear decision.</h2>
+        <p class="section-lede reveal">The tools and methods I use to clean, model and present data. No percentage bars: the projects below show how I use them.</p>
       </div>
 
-      <div class="skills-grid">
-        <article class="card skill-card reveal">
-          <h3><svg class="i" aria-hidden="true" focusable="false"><use href="#i-bars"/></svg>Business Intelligence</h3>
-          <ul class="skill-list">
-            <li class="skill"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-bars"/></svg>Power BI</li>
-            <li class="skill"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-fx"/></svg>DAX</li>
-            <li class="skill"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-funnel"/></svg>Power Query</li>
+      <div class="skills-bento">
+        <article class="skill-panel skill-panel-lg glass spot reveal">
+          <header><span class="panel-icon"><svg class="ico" aria-hidden="true"><use href="#i-chart-spline"/></svg></span><h3>Data analytics &amp; statistics</h3></header>
+          <ul class="skill-chips">
+            <li><svg class="ico ico-fill" aria-hidden="true"><use href="#i-r"/></svg>R</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-sigma"/></svg>Minitab</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-chart-scatter"/></svg>SPSS</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-scan-search"/></svg>Exploratory data analysis</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-funnel"/></svg>Data cleaning</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-chart-spline"/></svg>Statistical modelling</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-calendar"/></svg>Time series forecasting</li>
           </ul>
         </article>
 
-        <article class="card skill-card reveal">
-          <h3><svg class="i" aria-hidden="true" focusable="false"><use href="#i-grid"/></svg>Spreadsheets &amp; Automation</h3>
-          <ul class="skill-list">
-            <li class="skill"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-grid"/></svg>Excel (advanced formulas)</li>
-            <li class="skill"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-pivot"/></svg>PivotTables</li>
-            <li class="skill"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-code"/></svg>VBA</li>
+        <article class="skill-panel glass spot reveal">
+          <header><span class="panel-icon"><svg class="ico" aria-hidden="true"><use href="#i-chart-column"/></svg></span><h3>Visualisation &amp; BI</h3></header>
+          <ul class="skill-chips">
+            <li><svg class="ico" aria-hidden="true"><use href="#i-chart-column"/></svg>Power BI</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-square-function"/></svg>DAX</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-workflow"/></svg>Power Query</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-chart-pie"/></svg>Tableau</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-gauge"/></svg>KPI dashboards</li>
           </ul>
         </article>
 
-        <article class="card skill-card reveal">
-          <h3><svg class="i" aria-hidden="true" focusable="false"><use href="#i-terminal"/></svg>Programming &amp; Databases</h3>
-          <ul class="skill-list">
-            <li class="skill"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-db"/></svg>SQL</li>
-            <li class="skill"><i class="devicon-python-plain" aria-hidden="true"></i>Python</li>
-            <li class="skill"><i class="devicon-r-plain" aria-hidden="true"></i>R</li>
+        <article class="skill-panel glass spot reveal">
+          <header><span class="panel-icon"><svg class="ico" aria-hidden="true"><use href="#i-code-xml"/></svg></span><h3>Programming &amp; databases</h3></header>
+          <ul class="skill-chips">
+            <li><svg class="ico" aria-hidden="true"><use href="#i-database"/></svg>SQL</li>
+            <li><svg class="ico ico-fill" aria-hidden="true"><use href="#i-python"/></svg>Python</li>
+            <li><svg class="ico ico-fill" aria-hidden="true"><use href="#i-r"/></svg>R</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-code-xml"/></svg>Excel VBA</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-file-code"/></svg>Office Scripts</li>
+            <li><svg class="ico ico-fill" aria-hidden="true"><use href="#i-matlab"/></svg>MATLAB</li>
           </ul>
         </article>
 
-        <article class="card skill-card reveal">
-          <h3><svg class="i" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>Statistical Software</h3>
-          <ul class="skill-list">
-            <li class="skill"><i class="devicon-minitab-plain" aria-hidden="true"></i>Minitab</li>
-            <li class="skill"><i class="devicon-spss-plain" aria-hidden="true"></i>SPSS</li>
+        <article class="skill-panel glass spot reveal">
+          <header><span class="panel-icon"><svg class="ico" aria-hidden="true"><use href="#i-table-2"/></svg></span><h3>Productivity tools</h3></header>
+          <ul class="skill-chips">
+            <li><svg class="ico" aria-hidden="true"><use href="#i-sheet"/></svg>Excel: advanced formulas</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-table-properties"/></svg>PivotTables</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-presentation"/></svg>PowerPoint</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-type"/></svg>LaTeX</li>
           </ul>
         </article>
 
-        <article class="card skill-card reveal">
-          <h3><svg class="i" aria-hidden="true" focusable="false"><use href="#i-target"/></svg>Domain</h3>
-          <ul class="skill-list">
-            <li class="skill"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg>Quality metrics &amp; audits</li>
-            <li class="skill"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-bell"/></svg>Statistical modelling</li>
-            <li class="skill"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-present"/></svg>Management reporting</li>
+        <article class="skill-panel skill-panel-lg glass spot reveal">
+          <header><span class="panel-icon"><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg></span><h3>Domain knowledge</h3></header>
+          <ul class="skill-chips">
+            <li><svg class="ico" aria-hidden="true"><use href="#i-shield-check"/></svg>Quality metrics &amp; audits</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-gauge"/></svg>KPI monitoring</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-users"/></svg>Capacity &amp; staffing (SMV)</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-route"/></svg>Operations research</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-file-text"/></svg>Management reporting</li>
           </ul>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- =========================================================
-       5. EXPERIENCE
-       ========================================================= -->
-  <section class="section" id="experience" aria-labelledby="experience-title">
+  <!-- ===================== PROJECTS ===================== -->
+  <section class="section" id="work" aria-labelledby="work-title">
     <div class="container">
-      <div class="section-head reveal">
-        <h2 id="experience-title">Experience</h2>
-        <p>Hands-on quality analytics in apparel manufacturing.</p>
+      <div class="section-head section-head-wide">
+        <p class="section-kicker">Work</p>
+        <h2 id="work-title" data-split-words>Selected work</h2>
+        <p class="section-lede reveal">Five projects from my MAS Active internship and three from university. Internship data is confidential, so those cards describe the problem, approach and outcome without real figures.</p>
+      </div>
+
+      <div class="filters reveal" role="group" aria-label="Filter projects">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">All <span class="filter-count">8</span></button>
+        <button class="filter" type="button" data-filter="dashboards" aria-pressed="false">Dashboards <span class="filter-count">3</span></button>
+        <button class="filter" type="button" data-filter="analysis" aria-pressed="false">Analysis <span class="filter-count">2</span></button>
+        <button class="filter" type="button" data-filter="research" aria-pressed="false">Research <span class="filter-count">3</span></button>
+      </div>
+      <p class="sr-only" id="filter-status" aria-live="polite"></p>
+
+      <ul class="projects">
+
+        <!-- ========== Project 1: Sewing Quality Performance Review ========== -->
+        <li class="project" data-category="dashboards">
+          <article class="project-card glass spot reveal">
+            <div class="project-preview" data-tilt aria-hidden="true">
+              <svg viewBox="0 0 480 270" class="art">
+                <defs>
+                  <linearGradient id="a1bar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#5EEAD4" stop-opacity=".25"/></linearGradient>
+                </defs>
+                <rect class="art-win" x="24" y="22" width="432" height="226" rx="14"/>
+                <circle cx="44" cy="40" r="3.5" class="art-dot"/><circle cx="56" cy="40" r="3.5" class="art-dot"/><circle cx="68" cy="40" r="3.5" class="art-dot"/>
+                <g class="art-tile"><rect x="40" y="60" width="104" height="52" rx="9"/><rect x="40" y="122" width="104" height="52" rx="9"/><rect x="40" y="184" width="104" height="48" rx="9"/></g>
+                <g class="art-skel"><rect x="52" y="72" width="44" height="6" rx="3"/><rect x="52" y="86" width="70" height="12" rx="4"/><rect x="52" y="134" width="38" height="6" rx="3"/><rect x="52" y="148" width="60" height="12" rx="4"/><rect x="52" y="196" width="50" height="6" rx="3"/><rect x="52" y="210" width="66" height="12" rx="4"/></g>
+                <g class="art-grid"><path d="M164 92h196M164 132h196M164 172h196M164 212h196"/></g>
+                <g class="grow" fill="url(#a1bar)">
+                  <rect x="172" y="150" width="16" height="62" rx="4"/><rect x="196" y="130" width="16" height="82" rx="4"/><rect x="220" y="160" width="16" height="52" rx="4"/><rect x="244" y="116" width="16" height="96" rx="4"/><rect x="268" y="138" width="16" height="74" rx="4"/><rect x="292" y="104" width="16" height="108" rx="4"/><rect x="316" y="124" width="16" height="88" rx="4"/><rect x="340" y="96" width="16" height="116" rx="4"/>
+                </g>
+                <path class="draw art-line-sky" pathLength="1" d="M180 128L204 112 228 136 252 98 276 116 300 86 324 102 348 76"/>
+                <circle cx="408" cy="104" r="30" class="art-ring"/>
+                <circle cx="408" cy="104" r="30" class="draw art-arc" pathLength="1" style="--len:.72" transform="rotate(-90 408 104)"/>
+                <g class="art-skel"><rect x="380" y="152" width="56" height="6" rx="3"/><rect x="380" y="166" width="40" height="6" rx="3"/><rect x="380" y="196" width="56" height="6" rx="3"/><rect x="380" y="210" width="34" height="6" rx="3"/></g>
+              </svg>
+              <span class="preview-tag"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg>Confidential data</span>
+            </div>
+            <div class="project-body">
+              <ul class="project-meta"><li>Internship</li><li>Power BI dashboard</li></ul>
+              <h3>Sewing Quality Performance Review</h3>
+              <dl class="facts">
+                <div><dt>Problem</dt><dd>QA and management needed one place to review sewing quality performance.</dd></div>
+                <div><dt>Approach</dt><dd>Built a Power BI dashboard for QA sewing KPI monitoring and performance analysis, preparing the data with Power Query and DAX.</dd></div>
+                <div><dt>Outcome</dt><dd>A single, consistent view for regular sewing quality reviews.</dd></div>
+              </dl>
+              <ul class="tools" aria-label="Tools"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>Excel</li></ul>
+              <p class="confidential"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg>Confidential data: details available on request</p>
+            </div>
+          </article>
+        </li>
+
+        <!-- ========== Project 2: Fabric Inspection Performance Review ========== -->
+        <li class="project" data-category="dashboards">
+          <article class="project-card glass spot reveal">
+            <div class="project-preview" data-tilt aria-hidden="true">
+              <svg viewBox="0 0 480 270" class="art">
+                <defs>
+                  <linearGradient id="a2area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7DD3FC" stop-opacity=".45"/><stop offset="1" stop-color="#7DD3FC" stop-opacity="0"/></linearGradient>
+                </defs>
+                <g class="art-grid"><path d="M36 60h408M36 104h408M36 148h408M36 192h408"/></g>
+                <path class="fade" d="M36 170 C76 160 96 120 136 126 S196 168 236 146 S300 82 340 96 S410 70 444 58 L444 192 L36 192 Z" fill="url(#a2area)"/>
+                <path class="draw art-line-sky" pathLength="1" d="M36 170 C76 160 96 120 136 126 S196 168 236 146 S300 82 340 96 S410 70 444 58"/>
+                <path class="art-target" d="M36 118H444"/>
+                <g class="heat">
+                  <rect x="36" y="212" width="44" height="30" rx="6" style="--o:.25"/><rect x="88" y="212" width="44" height="30" rx="6" style="--o:.55"/><rect x="140" y="212" width="44" height="30" rx="6" style="--o:.35"/><rect x="192" y="212" width="44" height="30" rx="6" style="--o:.8"/><rect x="244" y="212" width="44" height="30" rx="6" style="--o:.45"/><rect x="296" y="212" width="44" height="30" rx="6" style="--o:.65"/><rect x="348" y="212" width="44" height="30" rx="6" style="--o:.3"/><rect x="400" y="212" width="44" height="30" rx="6" style="--o:.9"/>
+                </g>
+              </svg>
+              <span class="preview-tag"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg>Confidential data</span>
+            </div>
+            <div class="project-body">
+              <ul class="project-meta"><li>Internship</li><li>Power BI dashboard</li></ul>
+              <h3>Fabric Inspection Performance Review</h3>
+              <dl class="facts">
+                <div><dt>Problem</dt><dd>Fabric inspection performance had no clear, repeatable way to be reviewed.</dd></div>
+                <div><dt>Approach</dt><dd>Built a Power BI dashboard for fabric inspection KPI monitoring and performance analysis.</dd></div>
+                <div><dt>Outcome</dt><dd>A repeatable view of inspection performance for review meetings.</dd></div>
+              </dl>
+              <ul class="tools" aria-label="Tools"><li>Power BI</li><li>DAX</li><li>Power Query</li></ul>
+              <p class="confidential"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg>Confidential data: details available on request</p>
+            </div>
+          </article>
+        </li>
+
+        <!-- ========== Project 3: QCO Team Monitoring & Utilisation ========== -->
+        <li class="project" data-category="dashboards">
+          <article class="project-card glass spot reveal">
+            <div class="project-preview" data-tilt aria-hidden="true">
+              <svg viewBox="0 0 480 270" class="art">
+                <circle cx="110" cy="135" r="62" class="art-ring art-ring-thick"/>
+                <circle cx="110" cy="135" r="62" class="draw art-arc art-arc-thick" pathLength="1" style="--len:.64" transform="rotate(-90 110 135)"/>
+                <circle cx="110" cy="135" r="62" class="draw art-arc art-arc-thick art-arc-iris" pathLength="1" style="--len:.16; --off:-.66" transform="rotate(-90 110 135)"/>
+                <g class="art-grid"><path d="M214 56v158M276 56v158M338 56v158M400 56v158"/></g>
+                <g class="grow-x">
+                  <rect x="214" y="66" width="120" height="18" rx="9" class="bar-mint"/>
+                  <rect x="250" y="98" width="150" height="18" rx="9" class="bar-sky"/>
+                  <rect x="226" y="130" width="96" height="18" rx="9" class="bar-mint"/>
+                  <rect x="300" y="162" width="144" height="18" rx="9" class="bar-iris"/>
+                  <rect x="214" y="194" width="170" height="18" rx="9" class="bar-sky"/>
+                </g>
+              </svg>
+              <span class="preview-tag"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg>Confidential data</span>
+            </div>
+            <div class="project-body">
+              <ul class="project-meta"><li>Internship</li><li>Dashboard</li></ul>
+              <h3>QCO Team Monitoring &amp; Utilisation</h3>
+              <dl class="facts">
+                <div><dt>Problem</dt><dd>Quick Changeover (QCO) team activity and utilisation needed regular monitoring.</dd></div>
+                <div><dt>Approach</dt><dd>Built a Power BI dashboard tracking QCO KPIs, team activity and utilisation.</dd></div>
+                <div><dt>Outcome</dt><dd>One place to monitor how the QCO team's time is used.</dd></div>
+              </dl>
+              <ul class="tools" aria-label="Tools"><li>Power BI</li><li>Power Query</li><li>Excel</li></ul>
+              <p class="confidential"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg>Confidential data: details available on request</p>
+            </div>
+          </article>
+        </li>
+
+        <!-- ========== Project 4: End-line Inspection Team Member Utilisation ========== -->
+        <li class="project" data-category="analysis">
+          <article class="project-card glass spot reveal">
+            <div class="project-preview" data-tilt aria-hidden="true">
+              <svg viewBox="0 0 480 270" class="art">
+                <g class="heat heat-grid">
+                  <rect x="40" y="40" width="34" height="30" rx="6" style="--o:.3"/><rect x="80" y="40" width="34" height="30" rx="6" style="--o:.6"/><rect x="120" y="40" width="34" height="30" rx="6" style="--o:.45"/><rect x="160" y="40" width="34" height="30" rx="6" style="--o:.85"/><rect x="200" y="40" width="34" height="30" rx="6" style="--o:.5"/><rect x="240" y="40" width="34" height="30" rx="6" style="--o:.7"/>
+                  <rect x="40" y="76" width="34" height="30" rx="6" style="--o:.55"/><rect x="80" y="76" width="34" height="30" rx="6" style="--o:.35"/><rect x="120" y="76" width="34" height="30" rx="6" style="--o:.9"/><rect x="160" y="76" width="34" height="30" rx="6" style="--o:.4"/><rect x="200" y="76" width="34" height="30" rx="6" style="--o:.65"/><rect x="240" y="76" width="34" height="30" rx="6" style="--o:.3"/>
+                  <rect x="40" y="112" width="34" height="30" rx="6" style="--o:.75"/><rect x="80" y="112" width="34" height="30" rx="6" style="--o:.5"/><rect x="120" y="112" width="34" height="30" rx="6" style="--o:.25"/><rect x="160" y="112" width="34" height="30" rx="6" style="--o:.6"/><rect x="200" y="112" width="34" height="30" rx="6" style="--o:.95"/><rect x="240" y="112" width="34" height="30" rx="6" style="--o:.45"/>
+                  <rect x="40" y="148" width="34" height="30" rx="6" style="--o:.4"/><rect x="80" y="148" width="34" height="30" rx="6" style="--o:.8"/><rect x="120" y="148" width="34" height="30" rx="6" style="--o:.55"/><rect x="160" y="148" width="34" height="30" rx="6" style="--o:.3"/><rect x="200" y="148" width="34" height="30" rx="6" style="--o:.5"/><rect x="240" y="148" width="34" height="30" rx="6" style="--o:.7"/>
+                  <rect x="40" y="184" width="34" height="30" rx="6" style="--o:.6"/><rect x="80" y="184" width="34" height="30" rx="6" style="--o:.45"/><rect x="120" y="184" width="34" height="30" rx="6" style="--o:.7"/><rect x="160" y="184" width="34" height="30" rx="6" style="--o:.85"/><rect x="200" y="184" width="34" height="30" rx="6" style="--o:.35"/><rect x="240" y="184" width="34" height="30" rx="6" style="--o:.6"/>
+                </g>
+                <g class="art-people">
+                  <circle cx="324" cy="62" r="9" class="on"/><circle cx="352" cy="62" r="9" class="on"/><circle cx="380" cy="62" r="9" class="on"/><circle cx="408" cy="62" r="9" class="on"/><circle cx="436" cy="62" r="9"/>
+                  <circle cx="324" cy="92" r="9" class="on"/><circle cx="352" cy="92" r="9" class="on"/><circle cx="380" cy="92" r="9"/><circle cx="408" cy="92" r="9"/><circle cx="436" cy="92" r="9"/>
+                </g>
+                <rect class="art-tile-solid" x="304" y="130" width="148" height="84" rx="12"/>
+                <text class="art-formula" x="378" y="166" text-anchor="middle">⌈ Q × SMV ÷ 600 ⌉</text>
+                <g class="art-skel"><rect x="332" y="184" width="92" height="6" rx="3"/></g>
+              </svg>
+              <span class="preview-tag"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg>Confidential data</span>
+            </div>
+            <div class="project-body">
+              <ul class="project-meta"><li>Internship</li><li>Analysis &amp; automation</li></ul>
+              <h3>End-line Inspection Team Member Utilisation</h3>
+              <dl class="facts">
+                <div><dt>Problem</dt><dd>End-line inspection staffing needed evidence of how many team members each module required, and how fully their time was used.</dd></div>
+                <div><dt>Approach</dt><dd>Automated Excel workflows that calculate team member requirements and utilisation from sewing-plan quantities and SMV. An Excel Online tool with Office Scripts rebuilds the requirement for every module and date without touching the sewing plan.</dd></div>
+                <div><dt>Outcome</dt><dd>Staffing and allocation decisions supported by a calculation that updates itself.</dd></div>
+              </dl>
+              <p class="formula"><span>Required team members</span> = ⌈ daily quantity × SMV ÷ 600 ⌉ <small>600 = checking minutes available per day</small></p>
+              <ul class="tools" aria-label="Tools"><li>Excel</li><li>Office Scripts</li></ul>
+              <p class="confidential"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg>Confidential data: details available on request</p>
+            </div>
+          </article>
+        </li>
+
+        <!-- ========== Project 5: Internal Craftsmanship Audit ========== -->
+        <li class="project" data-category="analysis">
+          <article class="project-card glass spot reveal">
+            <div class="project-preview" data-tilt aria-hidden="true">
+              <svg viewBox="0 0 480 270" class="art">
+                <g class="art-styles">
+                  <rect x="36" y="44" width="52" height="64" rx="10"/><rect x="96" y="44" width="52" height="64" rx="10"/><rect x="156" y="44" width="52" height="64" rx="10"/><rect x="216" y="44" width="52" height="64" rx="10"/><rect x="276" y="44" width="52" height="64" rx="10"/>
+                  <rect x="36" y="118" width="52" height="64" rx="10"/><rect x="96" y="118" width="52" height="64" rx="10"/><rect x="156" y="118" width="52" height="64" rx="10"/><rect x="216" y="118" width="52" height="64" rx="10"/><rect x="276" y="118" width="52" height="64" rx="10"/>
+                </g>
+                <g class="art-checks">
+                  <path d="M52 77l7 7 13-14"/><path d="M112 77l7 7 13-14"/><path d="M172 77l7 7 13-14"/><path d="M232 77l7 7 13-14"/><path d="M292 77l7 7 13-14"/>
+                  <path d="M52 151l7 7 13-14"/><path d="M112 151l7 7 13-14"/><path d="M172 151l7 7 13-14"/><path d="M232 151l7 7 13-14"/><path d="M292 151l7 7 13-14"/>
+                </g>
+                <g class="art-skel"><rect x="36" y="204" width="180" height="8" rx="4"/><rect x="36" y="222" width="120" height="8" rx="4"/></g>
+                <path class="art-ring art-ring-thick" d="M354 196a50 50 0 1 1 100 0"/>
+                <path class="draw art-arc art-arc-thick" pathLength="1" style="--len:.86" d="M354 196a50 50 0 1 1 100 0"/>
+                <circle cx="404" cy="196" r="6" class="art-dot-solid"/>
+              </svg>
+              <span class="preview-tag"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg>Confidential data</span>
+            </div>
+            <div class="project-body">
+              <ul class="project-meta"><li>Internship</li><li>Audit &amp; reporting</li></ul>
+              <h3>Internal Craftsmanship Audit</h3>
+              <dl class="facts">
+                <div><dt>Problem</dt><dd>Management needed an evidence-based view of craftsmanship standards across styles.</dd></div>
+                <div><dt>Approach</dt><dd>Conducted internal craftsmanship audits across 10 styles, identified defects, tracked zero-defect and craftsmanship scores, and supported problem solving and preventive actions.</dd></div>
+                <div><dt>Outcome</dt><dd>Findings and next steps summarised for management review.</dd></div>
+              </dl>
+              <ul class="metrics"><li><strong>10</strong><span>styles audited</span></li></ul>
+              <ul class="tools" aria-label="Tools"><li>Excel</li><li>PowerPoint</li></ul>
+              <p class="confidential"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg>Confidential data: details available on request</p>
+            </div>
+          </article>
+        </li>
+
+        <!-- ========== Project 6: Undergraduate research, English fluency ========== -->
+        <li class="project" data-category="research">
+          <article class="project-card glass spot reveal">
+            <div class="project-preview" data-tilt aria-hidden="true">
+              <svg viewBox="0 0 480 270" class="art">
+                <g class="art-grid"><path d="M36 50h260M36 220h260"/></g>
+                <g class="art-points art-points-iris"><circle cx="48" cy="220" r="4.5"/><circle cx="66" cy="220" r="4.5"/><circle cx="84" cy="220" r="4.5"/><circle cx="104" cy="220" r="4.5"/><circle cx="126" cy="220" r="4.5"/><circle cx="150" cy="220" r="4.5"/><circle cx="178" cy="220" r="4.5"/><circle cx="210" cy="220" r="4.5"/></g>
+                <g class="art-points"><circle cx="118" cy="50" r="4.5"/><circle cx="146" cy="50" r="4.5"/><circle cx="170" cy="50" r="4.5"/><circle cx="196" cy="50" r="4.5"/><circle cx="222" cy="50" r="4.5"/><circle cx="246" cy="50" r="4.5"/><circle cx="270" cy="50" r="4.5"/><circle cx="290" cy="50" r="4.5"/></g>
+                <path class="draw art-line" pathLength="1" d="M36 218 C110 218 130 212 150 180 S180 70 210 56 S268 52 296 52"/>
+                <rect class="art-tile-solid" x="318" y="44" width="134" height="182" rx="14"/>
+                <path class="art-diag" d="M336 208L434 62"/>
+                <path class="draw art-line-sky" pathLength="1" d="M336 208C344 132 372 92 434 62"/>
+                <path class="art-axis" d="M336 62v146h98"/>
+              </svg>
+            </div>
+            <div class="project-body">
+              <ul class="project-meta"><li>University research</li><li>2025 – 2026</li></ul>
+              <h3>Factors Influencing English Fluency Among Undergraduates</h3>
+              <dl class="facts">
+                <div><dt>Question</dt><dd>Which demographic, educational, socioeconomic and exposure-related factors influence English fluency among Faculty of Science undergraduates at the University of Ruhuna?</dd></div>
+                <div><dt>Approach</dt><dd>Analysed a stratified sample of 383 undergraduates from a population of 1,850 across four academic levels and four degree programmes. Screened factors with chi-square and Mann–Whitney tests, then built a binary logistic regression model in R from 11 candidate predictors using purposeful selection with likelihood ratio tests. Evaluated with Hosmer–Lemeshow, McFadden's R², a confusion matrix and ROC/AUC, and wrote the report in LaTeX.</dd></div>
+                <div><dt>Findings</dt><dd>Five significant predictors: English-medium schooling, A/L English grade, A/L Z-score, media exposure and society membership.</dd></div>
+              </dl>
+              <ul class="metrics"><li><strong>76.8%</strong><span>accuracy</span></li><li><strong>0.835</strong><span>AUC</span></li><li><strong>383</strong><span>respondents</span></li></ul>
+              <ul class="tools" aria-label="Tools"><li>R</li><li>LaTeX</li></ul>
+              <!-- Optional: if you publish the code or report, add a link here, e.g.
+              <a class="text-link" href="https://github.com/Chirantha98/REPO-NAME" target="_blank" rel="noopener">View on GitHub<svg class="ico" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a> -->
+            </div>
+          </article>
+        </li>
+
+        <!-- ========== Project 7: Samba rice price forecasting ========== -->
+        <li class="project" data-category="research">
+          <article class="project-card glass spot reveal">
+            <div class="project-preview" data-tilt aria-hidden="true">
+              <svg viewBox="0 0 480 270" class="art">
+                <defs>
+                  <linearGradient id="a7band" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A5A6FF" stop-opacity=".05"/><stop offset="1" stop-color="#A5A6FF" stop-opacity=".35"/></linearGradient>
+                </defs>
+                <g class="art-grid"><path d="M36 60h408M36 110h408M36 160h408M36 210h408"/></g>
+                <path class="art-split" d="M318 44V226"/>
+                <path class="fade" d="M318 132 L444 82 L444 186 Z" fill="url(#a7band)"/>
+                <path class="draw art-line" pathLength="1" d="M36 186 L52 176 68 182 84 166 100 170 116 152 132 158 148 146 164 150 180 132 196 140 212 128 228 134 244 118 260 124 276 112 292 120 308 108 318 132"/>
+                <path class="draw art-forecast" pathLength="1" d="M318 132 L334 126 350 130 366 120 382 124 398 114 414 118 430 108 444 112"/>
+              </svg>
+            </div>
+            <div class="project-body">
+              <ul class="project-meta"><li>University project</li><li>2024 – 2025</li></ul>
+              <h3>Forecasting Monthly Retail Prices of Samba Rice</h3>
+              <dl class="facts">
+                <div><dt>Problem</dt><dd>Forecast monthly retail prices of Samba rice in Colombo.</dd></div>
+                <div><dt>Approach</dt><dd>Built ARIMA and SARIMA models in R, with ADF stationarity testing, model selection by AIC and BIC, and residual diagnostics to check model validity.</dd></div>
+                <div><dt>Outcome</dt><dd>An accurate monthly price forecast, later presented as co-authored work at a departmental symposium.</dd></div>
+              </dl>
+              <ul class="metrics"><li><strong>7.57%</strong><span>MAPE</span></li><li><strong>9.73</strong><span>RMSE</span></li></ul>
+              <ul class="tools" aria-label="Tools"><li>R</li><li>ARIMA / SARIMA</li></ul>
+            </div>
+          </article>
+        </li>
+
+        <!-- ========== Project 8: Cleaning staff scheduling (ILP) ========== -->
+        <li class="project" data-category="research">
+          <article class="project-card glass spot reveal">
+            <div class="project-preview" data-tilt aria-hidden="true">
+              <svg viewBox="0 0 480 270" class="art">
+                <g class="art-roster">
+                  <rect x="36" y="40" width="300" height="22" rx="7"/><rect x="36" y="70" width="300" height="22" rx="7"/><rect x="36" y="100" width="300" height="22" rx="7"/><rect x="36" y="130" width="300" height="22" rx="7"/><rect x="36" y="160" width="300" height="22" rx="7"/><rect x="36" y="190" width="300" height="22" rx="7"/>
+                </g>
+                <g class="grow-x">
+                  <rect x="40" y="44" width="110" height="14" rx="5" class="bar-mint"/><rect x="170" y="44" width="80" height="14" rx="5" class="bar-sky"/>
+                  <rect x="90" y="74" width="140" height="14" rx="5" class="bar-iris"/>
+                  <rect x="40" y="104" width="70" height="14" rx="5" class="bar-sky"/><rect x="130" y="104" width="120" height="14" rx="5" class="bar-mint"/>
+                  <rect x="150" y="134" width="150" height="14" rx="5" class="bar-mint"/>
+                  <rect x="60" y="164" width="100" height="14" rx="5" class="bar-iris"/><rect x="190" y="164" width="96" height="14" rx="5" class="bar-sky"/>
+                  <rect x="40" y="194" width="200" height="14" rx="5" class="bar-mint"/>
+                </g>
+                <g class="art-people art-people-sm">
+                  <circle cx="368" cy="70" r="6"/><circle cx="386" cy="70" r="6"/><circle cx="404" cy="70" r="6"/><circle cx="422" cy="70" r="6"/><circle cx="440" cy="70" r="6"/><circle cx="368" cy="88" r="6"/><circle cx="386" cy="88" r="6"/><circle cx="404" cy="88" r="6"/><circle cx="422" cy="88" r="6"/><circle cx="440" cy="88" r="6"/><circle cx="368" cy="106" r="6"/><circle cx="386" cy="106" r="6"/><circle cx="404" cy="106" r="6"/><circle cx="422" cy="106" r="6"/>
+                </g>
+                <path class="art-arrow" d="M404 124v28m-8-8 8 8 8-8"/>
+                <g class="art-people art-people-sm">
+                  <circle cx="368" cy="172" r="6" class="on"/><circle cx="386" cy="172" r="6" class="on"/><circle cx="404" cy="172" r="6" class="on"/><circle cx="422" cy="172" r="6" class="on"/><circle cx="440" cy="172" r="6" class="on"/><circle cx="368" cy="190" r="6" class="on"/><circle cx="386" cy="190" r="6" class="on"/><circle cx="404" cy="190" r="6" class="on"/><circle cx="422" cy="190" r="6" class="on"/><circle cx="440" cy="190" r="6" class="on"/><circle cx="368" cy="208" r="6" class="on"/>
+                </g>
+              </svg>
+            </div>
+            <div class="project-body">
+              <ul class="project-meta"><li>University project</li><li>2023</li></ul>
+              <h3>Optimising a Cleaning Staff Schedule</h3>
+              <dl class="facts">
+                <div><dt>Problem</dt><dd>Schedule cleaning workers across 6 departments with full coverage, under real operational constraints.</dd></div>
+                <div><dt>Approach</dt><dd>Formulated an integer linear programming model and solved it in MATLAB.</dd></div>
+                <div><dt>Outcome</dt><dd>Required cleaning staff fell from 14 to 11 workers while keeping full coverage.</dd></div>
+              </dl>
+              <ul class="metrics"><li><strong>14 → 11</strong><span>workers needed</span></li><li><strong>6</strong><span>departments</span></li></ul>
+              <ul class="tools" aria-label="Tools"><li>MATLAB</li><li>Integer linear programming</li></ul>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== EXPERIENCE & EDUCATION ===================== -->
+  <section class="section" id="journey" aria-labelledby="journey-title">
+    <div class="container">
+      <div class="section-head section-head-wide">
+        <p class="section-kicker">Journey</p>
+        <h2 id="journey-title" data-split-words>Experience &amp; education</h2>
       </div>
 
       <ol class="timeline">
-        <li class="timeline-item reveal">
-          <article class="card timeline-card">
-            <div class="timeline-meta">
-              <span class="tag">Apr 2026 – Oct 2026</span>
-              <span class="chip">Internship</span>
-            </div>
+        <li class="timeline-progress" aria-hidden="true"><span></span></li>
+
+        <li class="timeline-item">
+          <span class="timeline-node" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-briefcase-business"/></svg></span>
+          <article class="timeline-card glass spot reveal">
+            <p class="timeline-date">Apr 2026 – Oct 2026</p>
             <h3>Data Analyst Intern – Quality Assurance</h3>
-            <p class="org">MAS Active – Linea Intimo, Biyagama</p>
-            <ul>
-              <li>Conducted internal craftsmanship audits and tracked quality metrics, including zero-defect scores and craftsmanship scores.</li>
-              <li>Built Power BI dashboards reviewing sewing quality, fabric inspection, and QCO team performance and utilisation.</li>
-              <li>Analysed end-line inspection team member utilisation.</li>
+            <p class="timeline-org">MAS Active – Linea Intimo, Biyagama</p>
+            <ul class="timeline-list">
+              <li>Developed Power BI dashboards for QA sewing, fabric inspection and Quick Changeover (QCO) KPI monitoring and performance analysis.</li>
+              <li>Automated Excel workflows to calculate end-line inspection team member requirements and utilisation using SMV-based calculations.</li>
+              <li>Conducted internal craftsmanship audits across 10 styles, tracking zero-defect and craftsmanship scores, identifying defects and supporting problem solving and preventive actions.</li>
               <li>Collaborated across the QA, Sewing Operations, Industrial Engineering (IE), PCU and Technical teams.</li>
               <li>Prepared professional presentations and documents for management review.</li>
             </ul>
-            <ul class="team-chips" aria-label="Teams I worked with">
-              <li class="chip">QA</li>
-              <li class="chip">Sewing Operations</li>
-              <li class="chip">Industrial Engineering</li>
-              <li class="chip">PCU</li>
-              <li class="chip">Technical</li>
-            </ul>
+            <ul class="tag-row" aria-label="Teams I worked with"><li>QA</li><li>Sewing Operations</li><li>Industrial Engineering</li><li>PCU</li><li>Technical</li></ul>
+          </article>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-node" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-graduation-cap"/></svg></span>
+          <article class="timeline-card glass spot reveal">
+            <p class="timeline-date">2022 – 2026</p>
+            <h3>BSc (Hons) Financial Mathematics &amp; Industrial Statistics</h3>
+            <p class="timeline-org">University of Ruhuna</p>
+            <p class="timeline-note">All degree requirements completed; graduation pending.</p>
+            <ul class="tag-row" aria-label="Main subjects"><li>Statistics</li><li>Operations Research</li><li>Financial Mathematics</li><li>Time Series Analysis</li></ul>
+            <div class="timeline-sub">
+              <h4>Activities &amp; leadership</h4>
+              <ul class="timeline-list">
+                <li><strong>Showcasing Manager</strong>, Actuarial &amp; Data Science Society <span class="when">2025 – 2026</span></li>
+                <li>Member, Actuarial &amp; Data Science Society <span class="when">2024 – 2025</span></li>
+                <li>Member, Mathematics and Statistics Society <span class="when">2022 – 2025</span></li>
+                <li>Softball cricket, university batch meet participant <span class="when">2023 – 2026</span></li>
+              </ul>
+            </div>
+          </article>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-node" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-mic"/></svg></span>
+          <article class="timeline-card glass spot reveal">
+            <p class="timeline-date">2024</p>
+            <h3>Oral presenter and co-author</h3>
+            <p class="timeline-org">4th Mini Symposium, Department of Mathematics, University of Ruhuna</p>
+            <p class="timeline-note">Presented "Analysing the Impact of Lifestyle Factors on Human Sleep Health", and co-authored the Samba rice time series study.</p>
           </article>
         </li>
       </ol>
     </div>
   </section>
 
-  <!-- =========================================================
-       6. PROJECTS
-       ========================================================= -->
-  <section class="section" id="projects" aria-labelledby="projects-title">
+  <!-- ===================== HIGHLIGHTS & CREDENTIALS ===================== -->
+  <section class="section" id="highlights" aria-labelledby="highlights-title">
     <div class="container">
-      <div class="section-head reveal">
-        <h2 id="projects-title">Projects</h2>
-        <p>Five internship projects and one university research project. Internship data is confidential, so each card describes the problem, approach, tools and type of outcome.</p>
+      <div class="section-head section-head-wide">
+        <p class="section-kicker">Highlights</p>
+        <h2 id="highlights-title" data-split-words>Highlights &amp; credentials</h2>
       </div>
 
-      <div class="filters reveal" role="group" aria-label="Filter projects">
-        <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All</button>
-        <button class="filter-btn" type="button" data-filter="dashboards" aria-pressed="false">Dashboards</button>
-        <button class="filter-btn" type="button" data-filter="analysis" aria-pressed="false">Analysis</button>
-        <button class="filter-btn" type="button" data-filter="research" aria-pressed="false">Research</button>
-      </div>
-      <p class="sr-only" id="filter-status" aria-live="polite"></p>
-
-      <ul class="projects-grid">
-
-        <!-- Project 1: Internal Craftsmanship Audit -->
-        <li data-category="analysis">
-          <article class="card project-card reveal">
-            <div class="project-art" aria-hidden="true">
-              <svg viewBox="0 0 320 140" focusable="false">
-                <g fill="none" stroke-linecap="round">
-                  <circle cx="58" cy="38" r="9" stroke="#2DD4BF" stroke-width="2"/>
-                  <path d="M53 38l3.5 3.5 6.5-7" stroke="#2DD4BF" stroke-width="2"/>
-                  <path d="M80 38h120" stroke="#1F2937" stroke-width="8"/>
-                  <path d="M80 38h96" stroke="#2DD4BF" stroke-opacity=".7" stroke-width="8"/>
-                  <circle cx="58" cy="70" r="9" stroke="#2DD4BF" stroke-width="2"/>
-                  <path d="M53 70l3.5 3.5 6.5-7" stroke="#2DD4BF" stroke-width="2"/>
-                  <path d="M80 70h120" stroke="#1F2937" stroke-width="8"/>
-                  <path d="M80 70h110" stroke="#2DD4BF" stroke-opacity=".7" stroke-width="8"/>
-                  <circle cx="58" cy="102" r="9" stroke="#60A5FA" stroke-width="2"/>
-                  <path d="M80 102h120" stroke="#1F2937" stroke-width="8"/>
-                  <path d="M80 102h70" stroke="#60A5FA" stroke-opacity=".6" stroke-width="8"/>
-                  <circle cx="262" cy="70" r="30" stroke="#1F2937" stroke-width="8"/>
-                  <circle cx="262" cy="70" r="30" stroke="#2DD4BF" stroke-width="8" stroke-dasharray="160 189" transform="rotate(-90 262 70)"/>
-                </g>
-              </svg>
-            </div>
-            <div class="project-body">
-              <span class="tag">Internship · MAS Active</span>
-              <h3>Internal Craftsmanship Audit</h3>
-              <span class="project-label">Problem</span>
-              <p>Management needed a consistent, evidence-based view of craftsmanship standards on the floor.</p>
-              <span class="project-label">What I did</span>
-              <p>Conducted internal craftsmanship audits, tracked zero-defect and craftsmanship scores, and summarised findings and next steps for management.</p>
-              <ul class="tool-chips" aria-label="Tools">
-                <li class="chip">Excel</li><li class="chip">PowerPoint</li>
-              </ul>
-              <p class="outcome">Gave management a structured summary of audit findings and recommended next steps.</p>
-              <span class="confidential"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-lock"/></svg>Confidential data: details available on request</span>
-            </div>
-          </article>
-        </li>
-
-        <!-- Project 2: Sewing Quality Performance Review -->
-        <li data-category="dashboards">
-          <article class="card project-card reveal">
-            <div class="project-art" aria-hidden="true">
-              <svg viewBox="0 0 320 140" focusable="false">
-                <g stroke="#1F2937" stroke-width="1"><path d="M30 30h260M30 62h260M30 94h260"/></g>
-                <g fill="#2DD4BF" fill-opacity=".75">
-                  <rect x="46" y="74" width="22" height="46" rx="4"/>
-                  <rect x="86" y="56" width="22" height="64" rx="4"/>
-                  <rect x="126" y="66" width="22" height="54" rx="4"/>
-                  <rect x="166" y="42" width="22" height="78" rx="4"/>
-                  <rect x="206" y="50" width="22" height="70" rx="4"/>
-                  <rect x="246" y="36" width="22" height="84" rx="4"/>
-                </g>
-                <path d="M57 64L97 46 137 54 177 30 217 40 257 24" fill="none" stroke="#60A5FA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <g fill="#0B1120" stroke="#60A5FA" stroke-width="2"><circle cx="57" cy="64" r="4"/><circle cx="97" cy="46" r="4"/><circle cx="137" cy="54" r="4"/><circle cx="177" cy="30" r="4"/><circle cx="217" cy="40" r="4"/><circle cx="257" cy="24" r="4"/></g>
-              </svg>
-            </div>
-            <div class="project-body">
-              <span class="tag">Internship · Power BI dashboard</span>
-              <h3>Sewing Quality Performance Review</h3>
-              <span class="project-label">Problem</span>
-              <p>Sewing quality results needed to be reviewed in one place by the QA team and management.</p>
-              <span class="project-label">What I did</span>
-              <p>Built a Power BI dashboard to review sewing quality performance for the QA team and management.</p>
-              <ul class="tool-chips" aria-label="Tools">
-                <li class="chip">Power BI</li><li class="chip">DAX</li><li class="chip">Power Query</li><li class="chip">Excel</li>
-              </ul>
-              <p class="outcome">Gave the QA team and management a single view for regular quality reviews.</p>
-              <span class="confidential"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-lock"/></svg>Confidential data: details available on request</span>
-            </div>
-          </article>
-        </li>
-
-        <!-- Project 3: Fabric Inspection Performance Review -->
-        <li data-category="dashboards">
-          <article class="card project-card reveal">
-            <div class="project-art" aria-hidden="true">
-              <svg viewBox="0 0 320 140" focusable="false">
-                <defs>
-                  <linearGradient id="artArea3" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0" stop-color="#2DD4BF" stop-opacity=".35"/>
-                    <stop offset="1" stop-color="#2DD4BF" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-                <g stroke="#1F2937" stroke-width="1"><path d="M30 30h260M30 62h260M30 94h260M30 120h260"/></g>
-                <path d="M30 98 C60 92 75 70 105 74 S150 96 175 80 S220 44 250 52 S280 40 290 36 L290 120 L30 120 Z" fill="url(#artArea3)"/>
-                <path d="M30 98 C60 92 75 70 105 74 S150 96 175 80 S220 44 250 52 S280 40 290 36" fill="none" stroke="#2DD4BF" stroke-width="2.5" stroke-linecap="round"/>
-                <path d="M30 108 C70 104 100 96 140 98 S210 80 290 72" fill="none" stroke="#60A5FA" stroke-width="2" stroke-dasharray="5 6" stroke-linecap="round" opacity=".8"/>
-              </svg>
-            </div>
-            <div class="project-body">
-              <span class="tag">Internship · Dashboard</span>
-              <h3>Fabric Inspection Performance Review</h3>
-              <span class="project-label">Problem</span>
-              <p>Fabric inspection performance needed a clear, repeatable way to be reviewed.</p>
-              <span class="project-label">What I did</span>
-              <p>Built a dashboard to review fabric inspection performance.</p>
-              <ul class="tool-chips" aria-label="Tools">
-                <li class="chip">Power BI</li><li class="chip">DAX</li><li class="chip">Power Query</li>
-              </ul>
-              <p class="outcome">Provided a repeatable view of fabric inspection performance for review.</p>
-              <span class="confidential"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-lock"/></svg>Confidential data: details available on request</span>
-            </div>
-          </article>
-        </li>
-
-        <!-- Project 4: QCO Team Monitoring & Utilisation -->
-        <li data-category="dashboards">
-          <article class="card project-card reveal">
-            <div class="project-art" aria-hidden="true">
-              <svg viewBox="0 0 320 140" focusable="false">
-                <g fill="none" stroke-width="12">
-                  <circle cx="76" cy="70" r="36" stroke="#1F2937"/>
-                  <circle cx="76" cy="70" r="36" stroke="#2DD4BF" stroke-dasharray="150 226" transform="rotate(-90 76 70)"/>
-                  <circle cx="76" cy="70" r="36" stroke="#60A5FA" stroke-opacity=".7" stroke-dasharray="40 226" stroke-dashoffset="-154" transform="rotate(-90 76 70)"/>
-                </g>
-                <g stroke-linecap="round" stroke-width="10">
-                  <path d="M150 40h140" stroke="#1F2937"/><path d="M150 40h112" stroke="#2DD4BF" stroke-opacity=".75"/>
-                  <path d="M150 70h140" stroke="#1F2937"/><path d="M150 70h86" stroke="#2DD4BF" stroke-opacity=".75"/>
-                  <path d="M150 100h140" stroke="#1F2937"/><path d="M150 100h124" stroke="#60A5FA" stroke-opacity=".65"/>
-                </g>
-              </svg>
-            </div>
-            <div class="project-body">
-              <span class="tag">Internship · Dashboard</span>
-              <h3>QCO Team Monitoring &amp; Utilisation</h3>
-              <span class="project-label">Problem</span>
-              <p>QCO (Quick Changeover) team activity and utilisation needed regular monitoring.</p>
-              <span class="project-label">What I did</span>
-              <p>Built a dashboard to monitor QCO team activity and utilisation.</p>
-              <ul class="tool-chips" aria-label="Tools">
-                <li class="chip">Power BI</li><li class="chip">Power Query</li><li class="chip">Excel</li>
-              </ul>
-              <p class="outcome">Provided a single view of QCO team activity and utilisation for monitoring.</p>
-              <span class="confidential"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-lock"/></svg>Confidential data: details available on request</span>
-            </div>
-          </article>
-        </li>
-
-        <!-- Project 5: End-line Inspection Team Member Utilisation -->
-        <li data-category="analysis">
-          <article class="card project-card reveal">
-            <div class="project-art" aria-hidden="true">
-              <svg viewBox="0 0 320 140" focusable="false">
-                <g fill="#2DD4BF" fill-opacity=".8">
-                  <circle cx="60" cy="38" r="8"/><circle cx="90" cy="38" r="8"/><circle cx="120" cy="38" r="8"/><circle cx="150" cy="38" r="8"/><circle cx="180" cy="38" r="8"/>
-                  <circle cx="60" cy="70" r="8"/><circle cx="90" cy="70" r="8"/><circle cx="120" cy="70" r="8"/>
-                  <circle cx="60" cy="102" r="8"/><circle cx="90" cy="102" r="8"/><circle cx="120" cy="102" r="8"/><circle cx="150" cy="102" r="8"/>
-                </g>
-                <g fill="none" stroke="#1F2937" stroke-width="2">
-                  <circle cx="210" cy="38" r="7"/>
-                  <circle cx="150" cy="70" r="7"/><circle cx="180" cy="70" r="7"/><circle cx="210" cy="70" r="7"/>
-                  <circle cx="180" cy="102" r="7"/><circle cx="210" cy="102" r="7"/>
-                </g>
-                <g stroke-linecap="round" stroke-width="8">
-                  <path d="M246 38h44" stroke="#1F2937"/><path d="M246 38h36" stroke="#60A5FA" stroke-opacity=".7"/>
-                  <path d="M246 70h44" stroke="#1F2937"/><path d="M246 70h18" stroke="#60A5FA" stroke-opacity=".7"/>
-                  <path d="M246 102h44" stroke="#1F2937"/><path d="M246 102h28" stroke="#60A5FA" stroke-opacity=".7"/>
-                </g>
-              </svg>
-            </div>
-            <div class="project-body">
-              <span class="tag">Internship · Analysis</span>
-              <h3>End-line Inspection Team Member Utilisation</h3>
-              <span class="project-label">Problem</span>
-              <p>Staffing and allocation decisions for end-line inspection needed evidence on how team members' time was used.</p>
-              <span class="project-label">What I did</span>
-              <ul>
-                <li>Analysed end-line inspection team member utilisation to support staffing and allocation decisions.</li>
-                <!-- OPTIONAL: if this project included your Excel Online / Office Scripts tool, remove the comment markers around the next line. Otherwise delete it.
-                <li>Built an Excel Online tool with Office Scripts that calculates the inspection team members each module needs from sewing-plan quantities and SMV.</li>
-                -->
-              </ul>
-              <ul class="tool-chips" aria-label="Tools">
-                <li class="chip">Excel</li>
-              </ul>
-              <p class="outcome">Provided evidence to support staffing and allocation discussions.</p>
-              <span class="confidential"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-lock"/></svg>Confidential data: details available on request</span>
-            </div>
-          </article>
-        </li>
-
-        <!-- Project 6: Undergraduate research -->
-        <li data-category="research">
-          <article class="card project-card reveal">
-            <div class="project-art" aria-hidden="true">
-              <svg viewBox="0 0 320 140" focusable="false">
-                <g stroke="#1F2937" stroke-width="1"><path d="M30 26h260M30 114h260"/></g>
-                <g fill="#60A5FA" fill-opacity=".65">
-                  <circle cx="44" cy="114" r="4"/><circle cx="66" cy="114" r="4"/><circle cx="92" cy="114" r="4"/><circle cx="112" cy="114" r="4"/><circle cx="140" cy="114" r="4"/><circle cx="168" cy="114" r="4"/><circle cx="196" cy="114" r="4"/>
-                </g>
-                <g fill="#2DD4BF" fill-opacity=".75">
-                  <circle cx="130" cy="26" r="4"/><circle cx="160" cy="26" r="4"/><circle cx="186" cy="26" r="4"/><circle cx="214" cy="26" r="4"/><circle cx="238" cy="26" r="4"/><circle cx="262" cy="26" r="4"/><circle cx="282" cy="26" r="4"/>
-                </g>
-                <path d="M30 112 C110 112 130 108 150 90 S170 40 190 32 S250 28 290 28" fill="none" stroke="#2DD4BF" stroke-width="2.5" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="project-body">
-              <span class="tag">University project · Research</span>
-              <h3>Undergraduate Research: Factors Influencing English Fluency</h3>
-              <span class="project-label">Problem</span>
-              <p>Which factors influence English fluency among undergraduates in the Faculty of Science, University of Ruhuna?</p>
-              <span class="project-label">What I did</span>
-              <ul>
-                <li>Built a binary logistic regression model in R with 11 demographic, educational and behavioural predictors, using backward elimination with the likelihood ratio test.</li>
-                <li>Evaluated the model with Hosmer–Lemeshow, McFadden's R², a confusion matrix and ROC/AUC, and wrote the full report in LaTeX.</li>
-              </ul>
-              <ul class="tool-chips" aria-label="Tools">
-                <li class="chip"><i class="devicon-r-plain" aria-hidden="true"></i>R</li><li class="chip"><i class="devicon-latex-original" aria-hidden="true"></i>LaTeX</li>
-              </ul>
-              <p class="outcome">Produced a fully evaluated logistic regression model and a complete research report.</p>
-            </div>
-          </article>
-        </li>
+      <ul class="stat-grid">
+        <li class="stat glass reveal"><p class="stat-value"><span data-count="6">6</span><small>months</small></p><p class="stat-label">Quality analytics internship at MAS Active</p></li>
+        <li class="stat glass reveal"><p class="stat-value"><span data-count="3">3</span></p><p class="stat-label">Power BI dashboards built for QA</p></li>
+        <li class="stat glass reveal"><p class="stat-value"><span data-count="10">10</span><small>styles</small></p><p class="stat-label">Covered by internal craftsmanship audits</p></li>
+        <li class="stat glass reveal"><p class="stat-value"><span data-count="5">5</span><small>teams</small></p><p class="stat-label">Cross-functional teams I worked with</p></li>
+        <li class="stat glass reveal"><p class="stat-value"><span data-count="0.835" data-decimals="3">0.835</span><small>AUC</small></p><p class="stat-label">Logistic regression model, undergraduate research</p></li>
+        <li class="stat glass reveal"><p class="stat-value"><span data-count="7.57" data-decimals="2">7.57</span><small>% MAPE</small></p><p class="stat-label">Samba rice monthly price forecast</p></li>
       </ul>
-    </div>
-  </section>
 
-  <!-- =========================================================
-       7. EDUCATION
-       ========================================================= -->
-  <section class="section" id="education" aria-labelledby="education-title">
-    <div class="container">
-      <div class="section-head reveal">
-        <h2 id="education-title">Education</h2>
-      </div>
-
-      <article class="card edu-card reveal">
-        <div class="edu-main">
-          <span class="edu-icon" aria-hidden="true"><svg class="i" focusable="false"><use href="#i-cap"/></svg></span>
-          <div>
-            <span class="tag">2022 – 2026</span>
-            <h3>BSc (Hons) Financial Mathematics &amp; Industrial Statistics</h3>
-            <p class="org">University of Ruhuna</p>
-            <p class="edu-status">All degree requirements completed; graduation pending</p>
-          </div>
-        </div>
-        <div class="edu-sub">
-          <h4>Activities &amp; Leadership</h4>
-          <ul>
-            <!-- FILL IN: replace each line with a society, leadership role, volunteering or sport, with years. Add or remove <li> lines as needed. -->
-            <li><span class="placeholder">[FILL IN: Society or club, role, years]</span></li>
-            <li><span class="placeholder">[FILL IN: Leadership or volunteering role, years]</span></li>
-            <li><span class="placeholder">[FILL IN: Sport or other activity, years]</span></li>
+      <div class="cred-layout">
+        <div class="cred-block">
+          <h3 class="block-title"><svg class="ico" aria-hidden="true"><use href="#i-award"/></svg>Certifications</h3>
+          <ul class="cert-list">
+            <!-- To add a "View credential" link, put this inside a card, with your certificate URL:
+                 <a class="text-link" href="CREDENTIAL-URL" target="_blank" rel="noopener">View credential<svg class="ico" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a> -->
+            <li class="cert glass spot reveal"><span class="cert-year">2026</span><h4>Google Data Analytics Certificate</h4><p>Coursera</p></li>
+            <li class="cert glass spot reveal"><span class="cert-year">2026</span><h4>Excel Advanced Formulas and Functions</h4><p>LinkedIn Learning</p></li>
+            <li class="cert glass spot reveal"><span class="cert-year">2026</span><h4>Power BI Essential Training</h4><p>LinkedIn Learning</p></li>
+            <li class="cert glass spot reveal"><span class="cert-year">2026</span><h4>Python for Beginners</h4><p>University of Moratuwa</p></li>
           </ul>
         </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- =========================================================
-       8. CERTIFICATIONS
-       ========================================================= -->
-  <section class="section" id="certifications" aria-labelledby="certifications-title">
-    <div class="container">
-      <div class="section-head reveal">
-        <h2 id="certifications-title">Certifications</h2>
-      </div>
-
-      <ul class="cert-grid">
-        <!-- FILL IN: one card per certification. Copy a whole <li>…</li> block for each one.
-             Replace the name, issuer and date. Put the credential URL in href, or delete the <a> line if there is no link. -->
-        <li class="reveal">
-          <article class="card cert-card">
-            <span class="tag"><span class="placeholder">[FILL IN: Month Year]</span></span>
-            <h3><span class="placeholder">[FILL IN: Certification name]</span></h3>
-            <p class="cert-issuer"><span class="placeholder">[FILL IN: Issuer]</span></p>
-            <a class="cert-link" href="#" target="_blank" rel="noopener">View credential<svg class="i" aria-hidden="true" focusable="false"><use href="#i-external"/></svg></a>
-          </article>
-        </li>
-        <li class="reveal">
-          <article class="card cert-card">
-            <span class="tag"><span class="placeholder">[FILL IN: Month Year]</span></span>
-            <h3><span class="placeholder">[FILL IN: Certification name]</span></h3>
-            <p class="cert-issuer"><span class="placeholder">[FILL IN: Issuer]</span></p>
-            <a class="cert-link" href="#" target="_blank" rel="noopener">View credential<svg class="i" aria-hidden="true" focusable="false"><use href="#i-external"/></svg></a>
-          </article>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- =========================================================
-       9. TESTIMONIALS  (hidden until you have real quotes)
-       To enable: replace the placeholder text with real quotes you have permission to use,
-       remove the comment markers at the start and end of this section,
-       and remove the comment markers around the Testimonials link in the navigation.
-  <section class="section" id="testimonials" aria-labelledby="testimonials-title">
-    <div class="container">
-      <div class="section-head reveal">
-        <h2 id="testimonials-title">Testimonials</h2>
-      </div>
-      <ul class="quote-grid">
-        <li class="reveal">
-          <figure class="card quote-card">
-            <blockquote><p>"[FILL IN: Quote]"</p></blockquote>
-            <figcaption><strong>[FILL IN: Name]</strong>[FILL IN: Job title], [FILL IN: Company]</figcaption>
-          </figure>
-        </li>
-      </ul>
-    </div>
-  </section>
-       ========================================================= -->
-
-  <!-- =========================================================
-       10. CONTACT
-       ========================================================= -->
-  <section class="section" id="contact" aria-labelledby="contact-title">
-    <div class="container">
-      <div class="contact-panel reveal">
-        <h2 id="contact-title">Let's work together</h2>
-        <p>I'm open to entry-level Data Analyst, BI Analyst and Demand/Supply Planning roles. Email is the quickest way to reach me.</p>
-
-        <div class="email-row">
-          <a class="btn btn-primary email-link" href="mailto:chiranthag20@gmail.com">
-            <svg class="i" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>chiranthag20@gmail.com
-          </a>
-          <button class="btn" type="button" id="copy-email" data-email="chiranthag20@gmail.com">
-            <svg class="i" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg>Copy email
-          </button>
+        <div class="cred-block">
+          <h3 class="block-title"><svg class="ico" aria-hidden="true"><use href="#i-book-open-text"/></svg>Presentations</h3>
+          <ul class="pub-list">
+            <li class="pub glass spot reveal">
+              <span class="cert-year">2024</span>
+              <h4>"Analysing the Impact of Lifestyle Factors on Human Sleep Health"</h4>
+              <p>Oral presenter and co-author, 4th Mini Symposium, Department of Mathematics, University of Ruhuna</p>
+            </li>
+            <li class="pub glass spot reveal">
+              <span class="cert-year">2024</span>
+              <h4>"Modeling Monthly Average Retail Prices of Samba Rice in Colombo, Sri Lanka, Using Time Series"</h4>
+              <p>Co-author, 4th Mini Symposium, Department of Mathematics, University of Ruhuna</p>
+            </li>
+          </ul>
         </div>
-        <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
 
-        <ul class="contact-list">
-          <li>
-            <a class="contact-item" href="mailto:chiranthag20@gmail.com">
-              <svg class="i" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>
-              <div><span>Email</span><strong>chiranthag20@gmail.com</strong></div>
-            </a>
-          </li>
-          <li>
-            <a class="contact-item" href="https://www.linkedin.com/in/chiranthaekanayake" target="_blank" rel="noopener">
-              <i class="devicon-linkedin-plain" aria-hidden="true"></i>
-              <div><span>LinkedIn</span><strong>chiranthaekanayake</strong></div>
-              <span class="sr-only">(opens in a new tab)</span>
-            </a>
-          </li>
-          <li>
-            <a class="contact-item" href="https://github.com/Chirantha98" target="_blank" rel="noopener">
-              <i class="devicon-github-original" aria-hidden="true"></i>
-              <div><span>GitHub</span><strong>Chirantha98</strong></div>
-              <span class="sr-only">(opens in a new tab)</span>
-            </a>
-          </li>
-          <li>
-            <div class="contact-item">
-              <svg class="i" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>
-              <div><span>Location</span><strong>Matara, Sri Lanka</strong></div>
-            </div>
-          </li>
-        </ul>
+  <!-- ===================== CONTACT ===================== -->
+  <section class="section section-contact" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="contact-panel glass">
+        <div class="contact-intro">
+          <p class="section-kicker">Contact</p>
+          <h2 id="contact-title" data-split-words>Let's talk about your data.</h2>
+          <p class="section-lede">I'm open to entry-level Data Analyst, BI Analyst and Demand/Supply Planning Analyst roles. Send a message, or email me directly.</p>
+
+          <ul class="contact-links">
+            <li>
+              <a class="contact-link" href="mailto:chiranthag20@gmail.com">
+                <span class="contact-ico"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg></span>
+                <span><span class="contact-label">Email</span><span class="contact-value">chiranthag20@gmail.com</span></span>
+              </a>
+              <button class="copy-btn" type="button" data-copy="chiranthag20@gmail.com" aria-label="Copy email address"><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg></button>
+            </li>
+            <li>
+              <a class="contact-link" href="https://www.linkedin.com/in/chiranthaekanayake" target="_blank" rel="noopener">
+                <span class="contact-ico"><svg class="ico ico-fill" aria-hidden="true"><use href="#i-linkedin"/></svg></span>
+                <span><span class="contact-label">LinkedIn</span><span class="contact-value">chiranthaekanayake</span></span>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            </li>
+            <li>
+              <a class="contact-link" href="https://github.com/Chirantha98" target="_blank" rel="noopener">
+                <span class="contact-ico"><svg class="ico ico-fill" aria-hidden="true"><use href="#i-github"/></svg></span>
+                <span><span class="contact-label">GitHub</span><span class="contact-value">Chirantha98</span></span>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            </li>
+            <li>
+              <span class="contact-link">
+                <span class="contact-ico"><svg class="ico" aria-hidden="true"><use href="#i-map-pin"/></svg></span>
+                <span><span class="contact-label">Location</span><span class="contact-value">Matara, Sri Lanka</span></span>
+              </span>
+            </li>
+          </ul>
+          <p class="copy-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <!--
+          CONTACT FORM
+          GitHub Pages can't send email by itself. By default, "Send message" opens the visitor's
+          email app with the message filled in, addressed to you.
+          To receive messages directly instead, create a free form at https://formspree.io,
+          then paste its endpoint into data-endpoint below, e.g. data-endpoint="https://formspree.io/f/abcdwxyz"
+        -->
+        <form class="contact-form" novalidate data-endpoint="" data-mailto="chiranthag20@gmail.com">
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="100" aria-describedby="f-name-err">
+            <p class="field-error" id="f-name-err"></p>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="150" aria-describedby="f-email-err">
+            <p class="field-error" id="f-email-err"></p>
+          </div>
+          <div class="field">
+            <label for="f-company">Company <span class="optional">(optional)</span></label>
+            <input id="f-company" name="company" type="text" autocomplete="organization" maxlength="120">
+          </div>
+          <div class="field">
+            <label for="f-message">Message</label>
+            <textarea id="f-message" name="message" rows="5" required minlength="20" maxlength="3000" aria-describedby="f-message-err"></textarea>
+            <p class="field-error" id="f-message-err"></p>
+          </div>
+          <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn-primary btn-block" type="submit" data-magnetic>
+            <svg class="ico" aria-hidden="true"><use href="#i-send"/></svg><span class="btn-label">Send message</span>
+          </button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </div>
   </section>
 </main>
 
-<!-- =========================================================
-     11. FOOTER
-     ========================================================= -->
+<!-- ===================== FOOTER ===================== -->
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>© <span id="year">2026</span> Chirantha Ekanayake</p>
-    <ul class="footer-links">
-      <li><a class="icon-btn" href="https://www.linkedin.com/in/chiranthaekanayake" target="_blank" rel="noopener" aria-label="LinkedIn profile (opens in a new tab)"><i class="devicon-linkedin-plain" aria-hidden="true"></i></a></li>
-      <li><a class="icon-btn" href="https://github.com/Chirantha98" target="_blank" rel="noopener" aria-label="GitHub profile (opens in a new tab)"><i class="devicon-github-original" aria-hidden="true"></i></a></li>
-      <li><a class="icon-btn" href="mailto:chiranthag20@gmail.com" aria-label="Email Chirantha"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a></li>
-      <li><button class="icon-btn" type="button" id="back-to-top" aria-label="Back to top"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-up"/></svg></button></li>
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">CE</span><span class="sr-only">Back to top</span>
+    </a>
+    <p class="footer-copy">© <span data-year>2026</span> Chirantha Ekanayake</p>
+    <ul class="footer-social">
+      <li><a class="icon-link" href="https://www.linkedin.com/in/chiranthaekanayake" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="ico ico-fill" aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
+      <li><a class="icon-link" href="https://github.com/Chirantha98" target="_blank" rel="noopener" aria-label="GitHub (opens in a new tab)"><svg class="ico ico-fill" aria-hidden="true"><use href="#i-github"/></svg></a></li>
+      <li><a class="icon-link" href="mailto:chiranthag20@gmail.com" aria-label="Email Chirantha"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg></a></li>
+      <li><button class="icon-link to-top" type="button" aria-label="Back to top"><svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></button></li>
     </ul>
   </div>
 </footer>
 
-<script>
-(function () {
-  'use strict';
-
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- Footer year ---------- */
-  var yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  /* ---------- Profile photo fallback (if the image failed before this ran) ---------- */
-  var avatar = document.getElementById('avatar');
-  var avatarImg = avatar && avatar.querySelector('img');
-  if (avatarImg && avatarImg.complete && avatarImg.naturalWidth === 0) {
-    avatar.classList.add('no-photo');
-  }
-
-  /* ---------- Header border on scroll ---------- */
-  var header = document.querySelector('.site-header');
-  function onScroll() {
-    header.classList.toggle('is-scrolled', window.scrollY > 8);
-  }
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  /* ---------- Mobile menu ---------- */
-  var toggle = document.querySelector('.nav-toggle');
-  var menu = document.getElementById('nav-menu');
-  var desktop = window.matchMedia('(min-width: 1024px)');
-
-  function setMenu(open) {
-    toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    menu.classList.toggle('is-open', open);
-  }
-  toggle.addEventListener('click', function () {
-    setMenu(toggle.getAttribute('aria-expanded') !== 'true');
-  });
-  menu.addEventListener('click', function (e) {
-    if (e.target.closest('a') && !desktop.matches) setMenu(false);
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-      setMenu(false);
-      toggle.focus();
-    }
-  });
-  desktop.addEventListener('change', function () { setMenu(false); });
-
-  /* ---------- Active nav link while scrolling ---------- */
-  var navLinks = Array.prototype.slice.call(menu.querySelectorAll('a[href^="#"]'));
-  var sections = navLinks
-    .map(function (a) { return document.querySelector(a.getAttribute('href')); })
-    .filter(Boolean);
-
-  function setActive(id) {
-    navLinks.forEach(function (a) {
-      var on = a.getAttribute('href') === '#' + id;
-      a.classList.toggle('is-active', on);
-      if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
-    });
-  }
-
-  if ('IntersectionObserver' in window) {
-    var navObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) setActive(entry.target.id);
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    sections.forEach(function (s) { navObserver.observe(s); });
-
-    var heroObserver = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) setActive('');
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    heroObserver.observe(document.getElementById('home'));
-  }
-
-  /* ---------- Fade and slide up on scroll (once per element) ---------- */
-  var revealEls = document.querySelectorAll('.reveal');
-  if (reduceMotion || !('IntersectionObserver' in window)) {
-    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
-  } else {
-    var revealObserver = new IntersectionObserver(function (entries, obs) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    revealEls.forEach(function (el) { revealObserver.observe(el); });
-  }
-
-  /* ---------- Cycling role titles (gentle fade, every ~3s) ---------- */
-  var roleEl = document.getElementById('role-text');
-  var roles = ['Data Analyst', 'BI Analyst', 'Demand/Supply Planning Analyst'];
-  if (roleEl && !reduceMotion) {
-    var index = 0;
-    var cycles = 0;
-    var maxSteps = roles.length * 3; /* stops after three rounds, resting on the first role */
-    var timer = setInterval(function () {
-      roleEl.classList.add('is-fading');
-      setTimeout(function () {
-        index = (index + 1) % roles.length;
-        roleEl.textContent = roles[index];
-        roleEl.classList.remove('is-fading');
-      }, 450);
-      cycles += 1;
-      if (cycles >= maxSteps) clearInterval(timer);
-    }, 3000);
-  }
-
-  /* ---------- Project filters ---------- */
-  var filterBtns = document.querySelectorAll('.filter-btn');
-  var projectItems = document.querySelectorAll('.projects-grid > li');
-  var filterStatus = document.getElementById('filter-status');
-
-  filterBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var filter = btn.getAttribute('data-filter');
-      var shown = 0;
-      filterBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
-      projectItems.forEach(function (item) {
-        var match = filter === 'all' || item.getAttribute('data-category') === filter;
-        item.hidden = !match;
-        if (match) {
-          shown += 1;
-          var card = item.querySelector('.reveal');
-          if (card) card.classList.add('is-visible');
-        }
-      });
-      filterStatus.textContent = 'Showing ' + shown + (shown === 1 ? ' project' : ' projects');
-    });
-  });
-
-  /* ---------- Copy email ---------- */
-  var copyBtn = document.getElementById('copy-email');
-  var copyStatus = document.getElementById('copy-status');
-  if (copyBtn) {
-    copyBtn.addEventListener('click', function () {
-      var email = copyBtn.getAttribute('data-email');
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(email).then(function () {
-          copyStatus.textContent = 'Email copied to clipboard';
-        }, function () {
-          copyStatus.textContent = 'Copy failed. The address is ' + email;
-        });
-      } else {
-        copyStatus.textContent = 'The address is ' + email;
-      }
-    });
-  }
-
-  /* ---------- Back to top ---------- */
-  var backBtn = document.getElementById('back-to-top');
-  if (backBtn) {
-    backBtn.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
-      var logo = document.querySelector('.logo');
-      if (logo) logo.focus({ preventScroll: true });
-    });
-  }
-})();
-</script>
 </body>
 </html>
