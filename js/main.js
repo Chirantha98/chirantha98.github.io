@@ -608,15 +608,18 @@
     var lbImg = $('.lightbox-img', lightbox);
     var lbCap = $('.lightbox-text', lightbox);
     var lbOpen = $('.lightbox-open', lightbox);
+    // Phones get the portrait version, matching the <source> breakpoint in the cards
+    var phone = window.matchMedia('(max-width: 767px)');
     doc.addEventListener('click', function (e) {
       var link = e.target.closest('.preview-zoom');
       if (!link) return;
       e.preventDefault();
       var thumb = $('img', link);
-      lbImg.src = link.getAttribute('href');
+      var full = (phone.matches && link.getAttribute('data-full-mobile')) || link.getAttribute('href');
+      lbImg.src = full;
       lbImg.alt = thumb ? thumb.alt : '';
       lbCap.textContent = link.getAttribute('data-caption') || '';
-      lbOpen.href = link.getAttribute('href');
+      lbOpen.href = full;
       lightbox.showModal();
       if (lenis) lenis.stop();
     });

@@ -1,6 +1,6 @@
-# chiranthaekanayake.github.io
+# chirantha98.github.io
 
-Personal portfolio of Chirantha Ekanayake, Data Analyst. Live at https://chiranthaekanayake.github.io/
+Personal portfolio of Chirantha Ekanayake, Data Analyst. Live at https://chirantha98.github.io/
 
 A static site with no build step: edit the files and upload them, and GitHub Pages publishes the change.
 
@@ -13,8 +13,8 @@ A static site with no build step: edit the files and upload them, and GitHub Pag
 | `js/main.js` | Interactions: hero entrance, smooth scroll, 3D tilt, reveals, filters, form. |
 | `js/terrain.js` | The animated 3D "data terrain" in the hero (canvas, no libraries). |
 | `js/vendor/` | GSAP, ScrollTrigger and Lenis, bundled so the site has no CDN dependency. |
-| `fonts/` | Space Grotesk (headings), Inter (text) and JetBrains Mono (labels), self-hosted. |
-| `assets/projects/` | Project images: `name.webp` for the card and `name-full.webp` for the enlarged view. |
+| `fonts/` | Space Grotesk (headings), Inter (text, plus Inter Italic for the hero name) and JetBrains Mono (labels), self-hosted. |
+| `assets/projects/` | Project images. Desktop and tablet (landscape 16:9): `name.webp` for the card, `name-full.webp` enlarged. Phones up to 767px wide (portrait 4:5): `name-m.webp` for the card, `name-m-full.webp` enlarged. |
 | `assets/logos/` | Technology logos (Power BI, Excel, Tableau, Python, R, SQL, Minitab, MATLAB, PowerPoint), plus the MAS and University of Ruhuna logos. |
 | `assets/portrait-cutout.webp` | Portrait with the background removed, used in the 3D hero. |
 | `assets/profile.jpg` | Square photo, used for search engines and link previews. |
@@ -23,7 +23,7 @@ A static site with no build step: edit the files and upload them, and GitHub Pag
 
 ## Common edits
 
-- **Replace a project image:** save the new image over the matching files in `assets/projects/` (keep the same names), or ask for it to be resized to 960px (card) and 1600px (enlarged).
+- **Replace a project image:** save the new image over the matching files in `assets/projects/` (keep the same names), or ask for it to be resized: landscape 960×540 (card) and 1600×900 (enlarged); portrait 864×1080 (card) and 1122×1402 (enlarged).
 - **Update the CV:** upload a new PDF named exactly `Chirantha_Ekanayake_CV.pdf` into `assets/`.
 - **Add a certification:** in `index.html`, copy one `<li class="cert ...">` block under "Certifications".
 - **Add a credential link:** see the comment above the certification list in `index.html`.

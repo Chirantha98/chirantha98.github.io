@@ -25,6 +25,13 @@
   font-display: swap;
 }
 @font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-latin-wght-italic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
   font-family: "JetBrains Mono";
   src: url("../fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2");
   font-weight: 100 800;
@@ -70,7 +77,7 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --fs-hero: clamp(2.3rem, 1.45rem + 2.6vw, 3.25rem);    /* ≈ 37 → 52px */
-  --fs-name: clamp(1.3rem, 1.05rem + 1vw, 1.75rem);      /* ≈ 21 → 28px */
+  --fs-tagline: clamp(1.4rem, 1.05rem + 1.25vw, 2.05rem); /* ≈ 22 → 33px */
   --fs-h2: clamp(1.85rem, 1.35rem + 1.6vw, 2.5rem);      /* ≈ 30 → 40px */
   --fs-h3: clamp(1.125rem, 1.02rem + .45vw, 1.375rem);   /* ≈ 18 → 22px */
   --fs-project: clamp(1.2rem, 1.05rem + .55vw, 1.5rem);  /* ≈ 19 → 24px */
@@ -542,24 +549,28 @@ button { font: inherit; color: inherit; }
 .eyebrow-dot { width: 6px; height: 6px; margin-top: .5em; flex: none; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
 
 .hero-title { margin: 18px 0 0; }
-.hero-headline {
+/* Line 1: "Hi, I'm Chirantha Ekanayake" in true Inter Bold Italic, white */
+.hero-hi {
   display: block;
+  font-family: var(--font-text);
   font-size: var(--fs-hero);
-  font-weight: 600;
+  font-style: italic;
+  font-weight: 800;
   line-height: 1.08;
-  letter-spacing: -.03em;
+  letter-spacing: -.025em;
+  color: #FFFFFF;
 }
-.hero-name {
+/* Line 2: "— Turning Data into Decisions." upright Space Grotesk, cyan */
+.hero-tagline {
   display: block;
   margin-top: 14px;
-  font-size: var(--fs-name);
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -.015em;
-  background: var(--grad-text);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  font-family: var(--font-display);
+  font-size: var(--fs-tagline);
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  color: #06B6D4;
   width: fit-content;
 }
 .hero-lede {
@@ -884,7 +895,9 @@ button { font: inherit; color: inherit; }
   overflow: hidden;
   cursor: zoom-in;
 }
+.preview-zoom picture { display: block; width: 100%; height: 100%; }
 .preview-img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1250,6 +1263,11 @@ a.contact-link:hover { border-color: rgba(167,139,250,.5); background: rgba(139,
   .hero-layout { grid-template-areas: "stage" "copy"; }
   .stage { grid-area: stage; }
   .hero-copy { grid-area: copy; }
+}
+
+/* Phones: portrait (4:5) project images, same breakpoint as the <source> in index.html */
+@media (max-width: 767px) {
+  .project-preview { aspect-ratio: 4 / 5; }
 }
 
 @media (max-width: 559px) {
