@@ -120,6 +120,9 @@ html {
   text-size-adjust: 100%;
   scroll-padding-top: calc(var(--nav-h) + 32px);
   background: var(--navy);
+  /* With overflow set here, body's overflow-x: clip below clips the body itself
+     instead of being passed to the viewport (iPhone Safari ignores it there) */
+  overflow-x: hidden;
 }
 html:not(.lenis) { scroll-behavior: smooth; }
 html.lenis, html.lenis body { height: auto; }
@@ -203,6 +206,7 @@ button { font: inherit; color: inherit; }
   inset: 0;
   z-index: -2;
   overflow: hidden;
+  contain: strict;
   pointer-events: none;
   background:
     radial-gradient(ellipse 90% 60% at 50% -10%, rgba(99, 102, 241, .22), transparent 70%),
@@ -232,7 +236,7 @@ button { font: inherit; color: inherit; }
 
 .grain {
   position: fixed;
-  inset: -50%;
+  inset: 0;   /* never wider than the screen: iPhone Safari zooms out to fit oversized fixed layers */
   z-index: 150;
   pointer-events: none;
   opacity: .04;
@@ -253,6 +257,8 @@ button { font: inherit; color: inherit; }
   will-change: transform;
 }
 .has-pointer .cursor-light { opacity: 1; }
+/* Touch screens: no cursor, so drop the 640px light entirely */
+@media (hover: none), (pointer: coarse) { .cursor-light { display: none; } }
 
 /* ---------------------------------------------------------------------
    5. COMPONENTS
